@@ -683,6 +683,572 @@
         font-size: 14px;
       }
 
+
+
+      .anniversary-section {
+        margin-top: 44px;
+        text-align: center;
+      }
+
+      .anniversary-card {
+        width: min(820px, 100%);
+        margin: 0 auto;
+        padding: 30px 22px;
+        border-radius: 34px;
+        background:
+          radial-gradient(circle at 50% 0%, rgba(255, 210, 168, 0.18), transparent 42%),
+          linear-gradient(135deg, rgba(255, 181, 111, 0.13), rgba(28, 14, 10, 0.82));
+        border: 1px solid rgba(255, 190, 135, 0.2);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .anniversary-card::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(120deg, transparent, rgba(255, 210, 168, 0.18), transparent);
+        transform: translateX(-100%);
+        animation: anniversaryShine 4s infinite;
+        pointer-events: none;
+      }
+
+      @keyframes anniversaryShine {
+        0%, 45% { transform: translateX(-100%); }
+        70%, 100% { transform: translateX(100%); }
+      }
+
+      .anniversary-card h2 {
+        position: relative;
+        font-family: "Great Vibes", cursive;
+        font-size: clamp(48px, 7vw, 82px);
+        font-weight: 400;
+        color: #ffd2a8;
+        margin-bottom: 8px;
+        text-shadow: 0 0 18px rgba(255, 135, 40, 0.2);
+      }
+
+      .anniversary-card p {
+        position: relative;
+        color: #dfc3af;
+        line-height: 1.7;
+        margin-bottom: 22px;
+      }
+
+      .anniversary-btn {
+        position: relative;
+        border: none;
+        cursor: pointer;
+        border-radius: 999px;
+        padding: 15px 28px;
+        font-weight: 800;
+        font-size: 16px;
+        color: #2a1309;
+        background: linear-gradient(135deg, #ffd2a8, #ff8b47, #ffcf86);
+        box-shadow:
+          0 16px 36px rgba(255, 125, 30, 0.28),
+          0 0 0 0 rgba(255, 181, 111, 0.55);
+        animation: anniversaryPulse 1.8s infinite;
+        transition: transform 0.22s ease, filter 0.22s ease;
+      }
+
+      .anniversary-btn:hover {
+        transform: translateY(-4px) scale(1.03);
+        filter: brightness(1.08);
+      }
+
+      @keyframes anniversaryPulse {
+        0% { box-shadow: 0 16px 36px rgba(255, 125, 30, 0.28), 0 0 0 0 rgba(255, 181, 111, 0.48); }
+        70% { box-shadow: 0 16px 36px rgba(255, 125, 30, 0.28), 0 0 0 18px rgba(255, 181, 111, 0); }
+        100% { box-shadow: 0 16px 36px rgba(255, 125, 30, 0.28), 0 0 0 0 rgba(255, 181, 111, 0); }
+      }
+
+      .anniversary-overlay {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 60;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 50% 45%, rgba(255, 190, 135, 0.3), transparent 28%),
+          radial-gradient(circle at 20% 20%, rgba(255, 107, 107, 0.18), transparent 26%),
+          rgba(8, 5, 7, 0.86);
+        backdrop-filter: blur(12px);
+        overflow: hidden;
+      }
+
+      .anniversary-overlay.show {
+        display: flex;
+      }
+
+      .anniversary-message {
+        width: min(780px, 100%);
+        text-align: center;
+        border-radius: 36px;
+        padding: clamp(34px, 6vw, 64px) 24px;
+        background:
+          linear-gradient(180deg, rgba(255, 248, 239, 0.97), rgba(255, 228, 206, 0.94)),
+          radial-gradient(circle at 50% 0%, rgba(255, 156, 86, 0.22), transparent 42%);
+        color: #5b241f;
+        box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
+        position: relative;
+        transform: scale(0.78) rotate(-2deg);
+        opacity: 0;
+        animation: anniversaryPop 0.85s cubic-bezier(.18, .89, .32, 1.28) forwards;
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        overflow: hidden;
+      }
+
+      .anniversary-message::before {
+        content: "❤";
+        position: absolute;
+        top: -54px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 150px;
+        color: rgba(155, 36, 75, 0.08);
+      }
+
+      @keyframes anniversaryPop {
+        to {
+          transform: scale(1) rotate(0deg);
+          opacity: 1;
+        }
+      }
+
+      .anniversary-message .small-title {
+        position: relative;
+        display: inline-flex;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: rgba(155, 36, 75, 0.09);
+        color: #9b244b;
+        font-weight: 800;
+        margin-bottom: 18px;
+      }
+
+      .anniversary-message h2 {
+        position: relative;
+        font-family: "Great Vibes", cursive;
+        font-size: clamp(58px, 10vw, 118px);
+        line-height: 0.92;
+        font-weight: 400;
+        color: #9b244b;
+        margin-bottom: 16px;
+      }
+
+      .anniversary-message p {
+        position: relative;
+        max-width: 620px;
+        margin: 0 auto;
+        color: #6a332e;
+        font-size: clamp(16px, 2vw, 20px);
+        line-height: 1.75;
+      }
+
+      .anniversary-names {
+        position: relative;
+        margin-top: 22px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        color: #bd4a39;
+      }
+
+      .anniversary-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        z-index: 40;
+        width: 42px;
+        height: 42px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        background: #ffe3ec;
+        color: #9b244b;
+        font-size: 22px;
+        font-weight: 900;
+      }
+
+
+
+      .music-status {
+        position: absolute;
+        left: 18px;
+        bottom: 42px;
+        z-index: 13;
+        max-width: 300px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 210, 168, 0.12);
+        border: 1px solid rgba(255, 210, 168, 0.2);
+        color: #ffd2a8;
+        font-size: 12px;
+        font-weight: 700;
+        backdrop-filter: blur(8px);
+        display: none;
+      }
+
+      .music-status.show {
+        display: block;
+      }
+
+      .music-start-btn {
+        position: absolute;
+        left: 18px;
+        bottom: 78px;
+        z-index: 13;
+        border: none;
+        cursor: pointer;
+        border-radius: 999px;
+        padding: 10px 15px;
+        background: linear-gradient(135deg, #ffd2a8, #ff8b47);
+        color: #2a1309;
+        font-weight: 900;
+        display: none;
+      }
+
+      .music-start-btn.show {
+        display: inline-flex;
+      }
+
+      .movie-stage {
+        width: min(920px, 96vw);
+        height: min(620px, 86vh);
+        border-radius: 34px;
+        overflow: hidden;
+        position: relative;
+        background:
+          radial-gradient(circle at 50% 10%, rgba(255, 210, 168, 0.18), transparent 36%),
+          linear-gradient(180deg, #090608 0%, #160d10 45%, #080507 100%);
+        box-shadow: 0 42px 130px rgba(0, 0, 0, 0.68);
+        border: 1px solid rgba(255, 210, 168, 0.22);
+      }
+
+      .movie-stage::before,
+      .movie-stage::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 42px;
+        z-index: 7;
+        pointer-events: none;
+        background: repeating-linear-gradient(90deg, rgba(255,255,255,.12) 0 14px, transparent 14px 28px);
+        opacity: .22;
+      }
+
+      .movie-stage::before { top: 0; }
+      .movie-stage::after { bottom: 0; }
+
+      .movie-intro,
+      .movie-final {
+        position: absolute;
+        inset: 0;
+        z-index: 6;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: clamp(24px, 6vw, 70px);
+        background:
+          radial-gradient(circle at 50% 40%, rgba(255, 180, 120, 0.22), transparent 34%),
+          rgba(10, 6, 8, 0.9);
+        transition: opacity .8s ease, transform .8s ease;
+      }
+
+
+
+      .movie-final {
+        justify-content: flex-start;
+        overflow-y: auto;
+        padding-top: 76px;
+        padding-bottom: 72px;
+      }
+
+      .movie-final::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .movie-final::-webkit-scrollbar-thumb {
+        background: rgba(255, 210, 168, 0.35);
+        border-radius: 999px;
+      }
+
+      .movie-intro.hide,
+      .movie-final.hide {
+        opacity: 0;
+        transform: scale(1.05);
+        pointer-events: none;
+      }
+
+      .movie-intro .mini,
+      .movie-final .mini {
+        display: inline-flex;
+        margin-bottom: 16px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: rgba(255, 181, 111, 0.12);
+        border: 1px solid rgba(255, 181, 111, 0.28);
+        color: #ffcf9c;
+        font-weight: 800;
+      }
+
+      .movie-intro h2,
+      .movie-final h2 {
+        font-family: "Great Vibes", cursive;
+        font-size: clamp(56px, 9vw, 118px);
+        color: #ffd2a8;
+        font-weight: 400;
+        line-height: .95;
+        text-shadow: 0 0 28px rgba(255, 139, 71, .28);
+        margin-bottom: 18px;
+      }
+
+      .movie-intro p,
+      .movie-final p {
+        max-width: 680px;
+        color: #f5e7da;
+        line-height: 1.8;
+        font-size: clamp(15px, 2vw, 19px);
+      }
+
+
+      .anniversary-video-wrap {
+        width: min(720px, 92%);
+        margin-top: 22px;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .anniversary-video-wrap.show {
+        display: flex;
+      }
+
+      .anniversary-video {
+        position: relative;
+        z-index: 30;
+        width: 100%;
+        max-height: 42vh;
+        min-height: 220px;
+        border-radius: 24px;
+        background: #050304;
+        border: 1px solid rgba(255, 210, 168, 0.26);
+        box-shadow: 0 28px 70px rgba(0, 0, 0, 0.48);
+        object-fit: contain;
+      }
+
+      .video-play-fallback,
+      .video-picker-label {
+        position: relative;
+        z-index: 25;
+        display: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 999px;
+        padding: 11px 18px;
+        background: linear-gradient(135deg, #ffd2a8, #ff8b47);
+        color: #2a1309;
+        font-weight: 900;
+        box-shadow: 0 12px 28px rgba(255, 125, 30, 0.24);
+      }
+
+      .video-picker-label {
+        background: rgba(255, 210, 168, 0.14);
+        color: #ffd2a8;
+        border: 1px solid rgba(255, 210, 168, 0.26);
+      }
+
+      .video-play-fallback.show,
+      .video-picker-label.show {
+        display: inline-flex;
+      }
+
+      .video-file-input {
+        display: none;
+      }
+
+      .video-status {
+        min-height: 20px;
+        color: #ffd2a8;
+        font-size: 13px;
+        opacity: 0.9;
+        text-align: center;
+        line-height: 1.5;
+      }
+
+      .movie-slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transform: scale(1.08);
+        transition: opacity 1s ease, transform 4s ease;
+      }
+
+      .movie-slide.active {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .movie-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #070506;
+        display: block;
+        filter: saturate(1.08) contrast(1.02);
+      }
+
+      .movie-slide::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(to top, rgba(5, 3, 4, .76), transparent 42%),
+          radial-gradient(circle at 50% 50%, transparent 54%, rgba(0, 0, 0, .42));
+        pointer-events: none;
+      }
+
+      .movie-caption {
+        position: absolute;
+        left: 50%;
+        bottom: 62px;
+        z-index: 8;
+        transform: translateX(-50%);
+        width: min(760px, 88%);
+        min-height: 56px;
+        padding: 16px 22px;
+        border-radius: 999px;
+        background: rgba(8, 5, 7, .72);
+        border: 1px solid rgba(255, 210, 168, .2);
+        color: #ffd2a8;
+        text-align: center;
+        font-weight: 700;
+        font-size: clamp(14px, 2vw, 18px);
+        line-height: 1.45;
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .movie-caption.typing::after {
+        content: "|";
+        display: inline-block;
+        margin-left: 4px;
+        color: #fff1d8;
+        animation: typingCursor .75s infinite;
+      }
+
+      @keyframes typingCursor {
+        0%, 45% { opacity: 1; }
+        46%, 100% { opacity: 0; }
+      }
+
+      @keyframes captionIn {
+        from { opacity: 0; transform: translate(-50%, 18px); }
+        to { opacity: 1; transform: translate(-50%, 0); }
+      }
+
+      .movie-progress {
+        position: absolute;
+        left: 22px;
+        right: 22px;
+        bottom: 24px;
+        z-index: 9;
+        pointer-events: none;
+        height: 7px;
+        border-radius: 999px;
+        background: rgba(255,255,255,.14);
+        overflow: hidden;
+      }
+
+      .movie-progress span {
+        display: block;
+        width: 0%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #ff8b47, #ffd2a8, #ff6b8a);
+        transition: width .7s ease;
+      }
+
+      .movie-skip {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        z-index: 40;
+        border: none;
+        cursor: pointer;
+        border-radius: 999px;
+        padding: 10px 15px;
+        background: rgba(255, 210, 168, .14);
+        border: 1px solid rgba(255, 210, 168, .24);
+        color: #ffd2a8;
+        font-weight: 800;
+        backdrop-filter: blur(8px);
+      }
+
+      .movie-grain {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+        opacity: .1;
+        background-image:
+          radial-gradient(circle at 20% 30%, white 0 1px, transparent 1px),
+          radial-gradient(circle at 70% 60%, white 0 1px, transparent 1px);
+        background-size: 28px 28px, 34px 34px;
+        mix-blend-mode: screen;
+      }
+
+      .floating-heart,
+      .confetti-piece {
+        position: fixed;
+        z-index: 65;
+        pointer-events: none;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+      }
+
+      .floating-heart {
+        bottom: -30px;
+        font-size: var(--size);
+        left: var(--left);
+        animation-name: heartFloat;
+        animation-duration: var(--duration);
+        color: var(--color);
+        text-shadow: 0 0 18px rgba(255, 210, 168, 0.45);
+      }
+
+      @keyframes heartFloat {
+        0% { transform: translateY(0) rotate(0deg) scale(0.65); opacity: 0; }
+        12% { opacity: 1; }
+        100% { transform: translateY(-110vh) rotate(var(--rotate)) scale(1.15); opacity: 0; }
+      }
+
+      .confetti-piece {
+        top: -20px;
+        left: var(--left);
+        width: var(--w);
+        height: var(--h);
+        border-radius: 4px;
+        background: var(--color);
+        animation-name: confettiFall;
+        animation-duration: var(--duration);
+      }
+
+      @keyframes confettiFall {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(110vh) rotate(var(--rotate)); opacity: 0; }
+      }
+
       @media (max-width: 620px) {
         .page {
           width: 94%;
@@ -719,6 +1285,24 @@
           top: -12px;
           right: -8px;
         }
+
+        .movie-final {
+          padding-top: 72px;
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .anniversary-video {
+          min-height: 180px;
+          max-height: 34vh;
+        }
+
+        .video-play-fallback,
+        .video-picker-label {
+          width: min(280px, 90%);
+          justify-content: center;
+        }
+
       }
     </style>
   </head>
@@ -726,7 +1310,7 @@
   <body>
     <main class="page">
       <section class="hero">
-        <div class="eyebrow">🔥 Un rincón hecho solo para ti</div>
+        <div class="eyebrow">❤️ Un rincón hecho solo para ti</div>
         <h1>Para Ariana, el amor de mi vida</h1>
         <p>
           Este espacio es para guardar cada carta que escriba pensando en ti.
@@ -738,24 +1322,19 @@
       <section class="carousel-section">
         <div class="carousel">
           <div class="slide active">
-            <img
-              src="img/WhatsApp Image 2026-05-20 at 16.55.06.jpeg"
-              alt="Foto romántica 1"
-            />
+            <img src="img/foto (5).jpeg" alt="Foto romántica 1" />
           </div>
 
           <div class="slide">
-            <img
-              src="img/WhatsApp Image 2026-05-20 at 16.55.07 (2).jpeg"
-              alt="Foto romántica 2"
-            />
+            <img src="img/foto (1).jpeg" alt="Foto romántica 2" />
           </div>
 
           <div class="slide">
-            <img
-              src="img/WhatsApp Image 2026-05-20 at 16.55.08.jpeg"
-              alt="Foto romántica 3"
-            />
+            <img src="img/foto (7).jpeg" alt="Foto romántica 3" />
+          </div>
+
+          <div class="slide">
+            <img src="img/foto (13).jpeg" alt="Foto romántica 3" />
           </div>
 
           <div class="carousel-overlay">
@@ -779,6 +1358,21 @@
           </p>
           <div class="gallery-entry-btn">Abrir nuestra galería →</div>
         </button>
+      </section>
+
+
+
+      <section class="anniversary-section">
+        <div class="anniversary-card">
+          <h2>Una sorpresa para hoy</h2>
+          <p>
+            Presiona este botón y nuestras fotos se proyectarán como una pequeña película,
+            una por una, con una frase debajo que se escribirá en ese momento.
+          </p>
+          <button class="anniversary-btn" onclick="launchAnniversary()">
+            ✨ Soltar sorpresa de aniversario ✨
+          </button>
+        </div>
       </section>
 
       <section class="letters-section">
@@ -806,6 +1400,65 @@
 
       <div class="photos-grid" id="photosGrid"></div>
     </section>
+
+
+
+    <div class="anniversary-overlay" id="anniversaryOverlay">
+      <audio id="cinemaMusic" preload="auto" loop>
+        <source src="music/cancion.mp3" type="audio/mpeg" />
+        <source src="music/cancion.ogg" type="audio/ogg" />
+      </audio>
+
+      <div class="movie-stage" id="movieStage">
+        
+        <button class="music-start-btn" id="musicStartBtn" onclick="startCinemaMusic()">
+          ♫ Activar música
+        </button>
+        <div class="music-status" id="musicStatus"></div>
+        <button class="movie-skip" onclick="showMovieFinal()">Ver final ✨</button>
+        <button class="anniversary-close" onclick="closeAnniversary()">×</button>
+
+        <div class="movie-intro" id="movieIntro">
+          <div class="mini">03 de junio de 2026</div>
+          <h2>Nuestra pequeña película</h2>
+          <p>
+            Esto es todos los recuerdos que tengo contigo hasta este momento, mi amor.
+          </p>
+        </div>
+
+        <div id="movieSlides"></div>
+        <div class="movie-caption" id="movieCaption"></div>
+
+        <div class="movie-final hide" id="movieFinal">
+          <div class="mini">Elias + Ariana ❤</div>
+          <h2>Feliz primer mes</h2>
+          <p>
+            Gracias por cada sonrisa, cada mirada y cada momento bonito. Este es
+            solo el primer capítulo de todo lo que quiero vivir contigo. Te amo
+            mucho, mi amor.
+          </p>
+
+          <div class="anniversary-video-wrap" id="anniversaryVideoWrap">
+            <video
+              class="anniversary-video"
+              id="anniversaryVideo"
+              controls
+              playsinline
+              preload="metadata"
+              src="video/aniversario.mp4"
+            >
+              Tu navegador no puede reproducir este video.
+            </video>
+
+      
+
+          </div>
+        </div>
+
+        <div class="movie-progress"><span id="movieProgress"></span></div>
+        <div class="movie-grain"></div>
+      </div>
+    </div>
 
     <div class="photo-modal" id="photoModal">
       <div class="photo-modal-content">
@@ -864,48 +1517,124 @@
 
       const galleryPhotos = [
         {
-          src: "./img/WhatsApp Image 2026-05-20 at 16.55.04.jpeg",
+          src: "./img/foto (1).jpeg",
           alt: "Ariana y Elias 1",
         },
         {
-          src: "./img/WhatsApp Image 2026-05-20 at 16.55.05 (1).jpeg",
+          src: "./img/foto (3).jpeg",
+          alt: "Ariana y Elias 1",
+        },
+        {
+          src: "./img/foto (4).jpeg",
+          alt: "Ariana y Elias 1",
+        },
+        {
+          src: "./img/foto (5).jpeg",
+          alt: "Ariana y Elias 1",
+        },
+        {
+          src: "./img/foto (6).jpeg",
+          alt: "Ariana y Elias 1",
+        },
+        {
+          src: "./img/foto (7).jpeg",
+          alt: "Ariana y Elias 1",
+        },
+        {
+          src: "./img/foto (8).jpeg",
+          alt: "Ariana y Elias 1",
+        },
+        {
+          src: "./img/foto (9).jpeg",
+          alt: "Ariana y Elias 1",
+        },
+        {
+          src: "./img/foto (10).jpeg",
+          alt: "Ariana y Elias 1",
+        },
+        {
+          src: "./img/foto (11).jpeg",
+          alt: "Ariana y Elias 1",
+        },
+        {
+          src: "./img/foto (11).jpeg",
+          alt: "Ariana y Elias 1",
+        },
+        {
+          src: "./img/foto (12).jpeg",
           alt: "Ariana y Elias 2",
         },
         {
-          src: "./img/WhatsApp Image 2026-05-20 at 16.55.05 (2).jpeg",
+          src: "./img/foto (13).jpeg",
           alt: "Ariana y Elias 3",
         },
         {
-          src: "./img/WhatsApp Image 2026-05-20 at 16.55.05.jpeg",
+          src: "./img/foto (14).jpeg",
           alt: "Ariana y Elias 4",
         },
         {
-          src: "./img/WhatsApp Image 2026-05-20 at 16.55.06 (1).jpeg",
+          src: "./img/foto (15).jpeg",
           alt: "Ariana y Elias 5",
         },
         {
-          src: "./img/WhatsApp Image 2026-05-20 at 16.55.06 (2).jpeg",
+          src: "./img/foto (16).jpeg",
           alt: "Ariana y Elias 6",
         },
         {
-          src: "./img/WhatsApp Image 2026-05-20 at 16.55.06 (3).jpeg",
+          src: "./img/foto (17).jpeg",
           alt: "Ariana y Elias 7",
         },
         {
-          src: "./img/WhatsApp Image 2026-05-20 at 16.55.06 (4).jpeg",
+          src: "./img/foto (18).jpeg",
           alt: "Ariana y Elias 8",
         },
         {
-          src: "./img/WhatsApp Image 2026-05-20 at 16.55.06.jpeg",
+          src: "./img/foto (19).jpeg",
           alt: "Ariana y Elias 9",
         },
         {
-          src: "./img/WhatsApp Image 2026-05-20 at 16.55.07 (2).jpeg",
+          src: "./img/foto (20).jpeg",
           alt: "Ariana y Elias 10",
         },
         {
-          src: "./img/WhatsApp Image 2026-05-20 at 16.55.08.jpeg",
+          src: "./img/foto (21).jpeg",
           alt: "Ariana y Elias 11",
+        },
+        {
+          src: "./img/foto (22).jpeg",
+          alt: "Ariana y Elias 12",
+        },
+        {
+          src: "./img/foto (23).jpeg",
+          alt: "Ariana y Elias 13",
+        },
+        {
+          src: "./img/foto (24).jpeg",
+          alt: "Ariana y Elias 14",
+        },
+        {
+          src: "./img/foto (25).jpeg",
+          alt: "Ariana y Elias 15",
+        },
+        {
+          src: "./img/foto (26).jpeg",
+          alt: "Ariana y Elias 16",
+        },
+        {
+          src: "./img/foto (27).jpeg",
+          alt: "Ariana y Elias 17",
+        },
+        {
+          src: "./img/foto (28).jpeg",
+          alt: "Ariana y Elias 18",
+        },
+        {
+          src: "./img/foto (29).jpeg",
+          alt: "Ariana y Elias 19",
+        },
+        {
+          src: "./img/foto (30).jpeg",
+          alt: "Ariana y Elias 20",
         },
       ];
 
@@ -1084,6 +1813,129 @@ Eres todo eso, mi amor. Sin intención, solo existiendo y siendo como eres, le e
 
 Te amo, amor. Hoy, mañana y siempre.`,
         },
+       {
+          number: 12,
+          date: "29 de mayo de 2026",
+          preview: "Un amor real",
+          text: `Mi amor,
+
+A veces pienso que el amor verdadero no necesita ser perfecto para ser hermoso. Lo nuestro es humano, auténtico, intenso y sincero. Es de esos amores que no solo se dicen con palabras, sino que se sienten en la mirada, en la sonrisa, en el corazón y hasta en el alma.
+
+Cuando estamos juntos, puedo ver tus ojos brillar como brillan los míos. Puedo ver tu sonrisa encontrándose con la mía, y sentir cómo tu alegría despierta la mía cada vez que te veo.
+
+Pienso en ti todos los días, amor, y cada pensamiento me recuerda lo especial que eres para mí. Hay algo en ti que alegra mi corazón, que ilumina mis días y que me hace sentir agradecido por tenerte en mi vida. Tu forma de ser, tu mirada y tu sonrisa hacen que lo que siento por ti crezca cada vez más, de una manera sincera, profunda y bonita.
+
+Quiero seguir aprendiendo a tu lado, aprender de ti, de nosotros y de este amor que Dios puso en nuestras manos. Porque desde que llegaste a mi vida, entendí que amar no es solo sentir, también es cuidar, valorar, comprender y elegir con el corazón.
+
+Sé que todavía tengo mucho por aprender y reconozco mis errores, pero también reconozco algo con toda mi alma. Lo que siento por ti es tan grande, tan puro y tan verdadero, que parece tocar el cielo.
+
+Amor, mis ojos siempre te mirarán con admiración. Mi sonrisa siempre reflejará lo que mi alma siente por ti. Y mi corazón, hoy y siempre, será tuyo.
+
+Te amo, mi amor. Porque contigo entendí que el amor más bonito no es el perfecto, sino el que se cuida, se elige y se construye con el alma.`,
+        },
+
+        {
+          number: 13,
+          date: "01 de junio de 2026",
+          preview: "Lo bello que llevas dentro",
+          text: `Mi amor, Ariana:
+
+A veces siento que una de mis misiones más bonitas es recordarte algo que quizá tú misma olvidas: lo bello que es tu corazón y lo hermosa que es tu alma. Porque hay personas que brillan por lo que tienen, por lo que muestran o por lo que el mundo puede ver fácilmente; pero tú brillas de una forma distinta, más profunda y más verdadera.
+
+Tu valor no está en lo material, ni en lo que puedas poseer, ni en lo que los demás puedan medir con los ojos. Tu valor está en quién eres. Está en tu forma de sentir, en tu manera de cuidar, en la ternura que llevas dentro, en la luz que das incluso cuando no te das cuenta. Hay cosas que el dinero puede comprar, pero jamás podrá comprar un corazón sincero, una mirada noble, una presencia que da calma o un alma que transmite paz.
+
+Y eso es lo que yo veo en ti.
+
+Veo a una persona valiosa no por lo que tiene, sino por lo que es. Por su esencia, por su manera de amar, por su forma de existir en este mundo. Y por eso quiero recordártelo siempre: no necesitas compararte con nadie, no necesitas demostrar más de lo que ya eres, porque en ti ya existe una belleza que no se puede fingir ni reemplazar.
+
+Te recordaré todo esto, amor, porque todo esto eres. Y si no lo sabías, aquí estoy yo para recordarte lo bello de tu interior, lo grande de tu corazón y lo especial que es tu alma.
+
+Tu corazón es bello, mi amor. Tu alma también. Y mientras pueda, quiero ser esa voz que te lo recuerde cuando el mundo sea pesado, cuando dudes de ti o cuando olvides lo especial que eres.
+
+Con mucho cariño,`,
+        },
+        
+        {
+          number: 14,
+          date: "03 de junio de 2026",
+          preview: "El secreto",
+          text: `Disculpa no he escrito en estos dias, pero no se porque esta historia no sale de mi mente. Aunque soy una persona de poca lectura me gusta mucho escribir.
+          Y entre mis escritos quise dar el doble de medida que suelo dar, asi como la dedicación y amor. Espero te guste y puedas sentir lo mismo que yo al escribirlo.
+
+
+          """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+          Había una vez, en un valle tranquilo donde las estrellas bajaban un poquito más cerca de la tierra, dos personitas que caminaban por caminos distintos, aunque sin saberlo, sus pasos siempre apuntaban al mismo lugar.
+
+Él era un muchacho de corazón grande, tan grande que a veces le pesaba en el pecho. Amaba mucho a aquella muchacha de mirada dulce, pero dentro de sí guardaba un pensamiento pequeñito y triste, como una nube gris escondida detrás del sol.
+
+—Quizá no soy suficiente para ella —susurraba él algunas noches, mirando la luna.
+
+Y la luna, sabia y callada, no respondía. Solo brillaba.
+
+La muchacha, por su parte, caminaba con una luz muy especial en los ojos. No era una luz cualquiera. Era de esas luces que no se apagan con el viento ni con la distancia. Era una luz que esperaba, aunque todavía no sabía exactamente qué esperaba.
+
+Pasaron los días, pasaron las tardes, y una noche suave, de esas noches donde todo parece hablar bajito, el muchacho tuvo la oportunidad de caminar junto a ella.
+
+El cielo estaba oscuro, pero no daba miedo. Las estrellas parecían pequeñas velitas encendidas solo para ellos.
+
+Entonces, él respiró profundo.
+
+Miró su mano.
+
+Miró la mano de ella.
+
+Y con mucho cuidado, como quien toca algo sagrado, tomó su mano.
+
+La muchacha no la soltó.
+
+Y en ese momento, el corazón del muchacho hizo pum, pum, pum, como tamborcito emocionado.
+
+Él bajó la mirada, suspiró y observó con detalle aquel instante, como si el mundo entero se hubiera quedado quieto para escuchar.
+
+—Tengo algo guardado —dijo él con voz bajita—. Algo que nunca le he entregado a nadie.
+
+La muchacha lo miró con atención.
+
+Él sintió miedo, pero también sintió valentía. Porque hay secretos que no pesan cuando se entregan a la persona correcta.
+
+Entonces abrió su corazón, como quien abre una cajita de madera donde guarda lo más valioso de sí mismo, y le reveló su mayor secreto:
+
+—Desde hace mucho, tú eres mi lugar favorito. Pero a veces tuve miedo de no ser suficiente para ti.
+
+La muchacha no se rió.
+No se alejó.
+No soltó su mano.
+
+Solo lo miró.
+
+Y sus ojos brillaron.
+
+Pero no brillaron como brillan las cosas bonitas de lejos. Brillaron igual que los ojos de él. Con la misma ternura. Con el mismo miedo. Con la misma esperanza.
+
+Entonces él comprendió algo maravilloso.
+
+No era solo él quien había esperado.
+No era solo él quien había sentido.
+No era solo él quien había guardado amor en silencio.
+
+Ella también tenía una luz escondida.
+
+Y esa noche, bajo el cielo lleno de estrellas, el destino sonrió como un abuelo sabio que por fin termina de atar un lazo.
+
+Porque aquellas dos personas, que durante tanto tiempo habían caminado sin saberlo, estaban unidas por hilos invisibles. Hilos suaves. Hilos dorados. Hilos hechos del más puro amor.
+
+Y desde entonces, cuando el viento pasaba entre los árboles, parecía decir:
+
+—Algunas almas no se encuentran por casualidad. Algunas almas solo esperan el momento exacto para reconocerse.
+
+Y así, tomados de la mano, entendieron que hay amores que no nacen de prisa, ni se apagan con el tiempo.
+
+Hay amores que permanecen.
+
+Como las estrellas.
+Como la luna.
+Como dos luces que, por fin, descubren que siempre brillaron para encontrarse.`,
+        }
       ];
 
       const lettersGrid = document.getElementById("lettersGrid");
@@ -1123,6 +1975,432 @@ Te amo, amor. Hoy, mañana y siempre.`,
           closeLetter();
         }
       });
+
+
+      const anniversaryOverlay = document.getElementById("anniversaryOverlay");
+      const movieSlidesContainer = document.getElementById("movieSlides");
+      const movieIntro = document.getElementById("movieIntro");
+      const movieFinal = document.getElementById("movieFinal");
+      const movieCaption = document.getElementById("movieCaption");
+      const movieProgress = document.getElementById("movieProgress");
+      const cinemaMusic = document.getElementById("cinemaMusic");
+      const musicStatus = document.getElementById("musicStatus");
+      const musicStartBtn = document.getElementById("musicStartBtn");
+      const anniversaryVideoWrap = document.getElementById("anniversaryVideoWrap");
+      const anniversaryVideo = document.getElementById("anniversaryVideo");
+      const videoPlayFallback = document.getElementById("videoPlayFallback");
+      const videoStatus = document.getElementById("videoStatus");
+
+      const moviePhrases = [
+        "Todo empezó con una sonrisa que se volvió mi lugar favorito.",
+        "Contigo, los días simples se sienten como escenas que quiero repetir.",
+        "Tus ojitos tienen esa luz que calma mi mundo entero.",
+        "Cada foto nuestra guarda algo que mi corazón no quiere olvidar.",
+        "Un mes puede sonar poquito, pero contigo se siente gigante.",
+        "Gracias por hacerme sentir que el amor también puede ser hogar.",
+        "Quiero seguir coleccionando momentos, risas y planes contigo.",
+        "Ariana, tú eres mi capítulo más bonito de este comienzo.",
+        "Donde estés tú, mi corazón encuentra una razón para sonreír.",
+        "Cada recuerdo contigo se siente como una escena favorita.",
+        "Si pudiera repetir una escena, elegiría cualquier momento contigo.",
+        "Este primer mes es solo el tráiler de todo lo hermoso que viene.",
+        "Te amo, mi amor. Feliz primer mes.",
+      ];
+
+      let movieTimer = null;
+      let typingTimer = null;
+      let movieSlides = [];
+      const scenePauseTime = 850;
+      const afterTypingPauseTime = 1700;
+
+      function getAllMoviePhotos() {
+        const carouselPhotos = Array.from(
+          document.querySelectorAll(".carousel .slide img"),
+        ).map((img, index) => ({
+          src: img.getAttribute("src"),
+          alt: img.getAttribute("alt") || `Foto romántica ${index + 1}`,
+        }));
+
+        const mergedPhotos = [...carouselPhotos, ...galleryPhotos];
+        const seen = new Set();
+
+        return mergedPhotos.filter((photo) => {
+          if (!photo.src || seen.has(photo.src)) {
+            return false;
+          }
+          seen.add(photo.src);
+          return true;
+        });
+      }
+
+      function buildMovieSlides() {
+        movieSlidesContainer.innerHTML = "";
+        const moviePhotos = getAllMoviePhotos();
+
+        moviePhotos.forEach((photo) => {
+          const scene = document.createElement("div");
+          scene.className = "movie-slide";
+          scene.innerHTML = `<img src="${photo.src}" alt="${photo.alt}" />`;
+          movieSlidesContainer.appendChild(scene);
+        });
+
+        movieSlides = document.querySelectorAll(".movie-slide");
+      }
+
+      function launchAnniversary() {
+        anniversaryOverlay.classList.add("show");
+        document.body.style.overflow = "hidden";
+        createAnniversaryMagic();
+        buildMovieSlides();
+        startCinemaMusic();
+        startMovieProjection();
+      }
+
+      function startMovieProjection() {
+        clearTimeout(movieTimer);
+        clearTimeout(typingTimer);
+        movieIntro.classList.remove("hide");
+        movieFinal.classList.add("hide");
+        const movieSkipButtonStart = document.querySelector(".movie-skip");
+        if (movieSkipButtonStart) {
+          movieSkipButtonStart.style.display = "";
+        }
+        movieCaption.textContent = "";
+        movieCaption.classList.remove("typing");
+        movieCaption.style.opacity = "0";
+        movieProgress.style.width = "0%";
+        movieSlides.forEach((slide) => slide.classList.remove("active"));
+
+        movieTimer = setTimeout(() => {
+          movieIntro.classList.add("hide");
+          showMovieScene(0);
+        }, 1500);
+      }
+
+      function typeMovieCaption(text, onComplete) {
+        clearTimeout(typingTimer);
+        let letterIndex = 0;
+        movieCaption.textContent = "";
+        movieCaption.classList.add("typing");
+        movieCaption.style.animation = "none";
+        void movieCaption.offsetWidth;
+        movieCaption.style.animation = "captionIn 0.9s ease forwards";
+
+        function writeLetter() {
+          movieCaption.textContent = text.slice(0, letterIndex);
+          letterIndex++;
+
+          if (letterIndex <= text.length) {
+            typingTimer = setTimeout(writeLetter, 45);
+          } else {
+            movieCaption.classList.remove("typing");
+            if (typeof onComplete === "function") {
+              onComplete();
+            }
+          }
+        }
+
+        writeLetter();
+      }
+
+      function showMovieScene(index) {
+        clearTimeout(movieTimer);
+        clearTimeout(typingTimer);
+
+        if (index >= movieSlides.length) {
+          showMovieFinal();
+          return;
+        }
+
+        movieSlides.forEach((slide) => slide.classList.remove("active"));
+        movieCaption.textContent = "";
+        movieCaption.classList.remove("typing");
+        movieCaption.style.opacity = "0";
+
+        movieTimer = setTimeout(() => {
+          movieSlides[index].classList.add("active");
+          movieProgress.style.width = `${((index + 1) / (movieSlides.length + 1)) * 100}%`;
+
+          const phrase = moviePhrases[index % moviePhrases.length];
+          typeMovieCaption(phrase, () => {
+            movieTimer = setTimeout(() => {
+              showMovieScene(index + 1);
+            }, afterTypingPauseTime);
+          });
+        }, scenePauseTime);
+      }
+
+      function setCinemaMusicVolume(targetVolume, duration = 900) {
+        if (!cinemaMusic) {
+          return;
+        }
+
+        const startVolume = cinemaMusic.volume;
+        const difference = targetVolume - startVolume;
+        const startTime = performance.now();
+
+        function animateVolume(currentTime) {
+          const progress = Math.min((currentTime - startTime) / duration, 1);
+          cinemaMusic.volume = Math.max(0, Math.min(1, startVolume + difference * progress));
+
+          if (progress < 1) {
+            requestAnimationFrame(animateVolume);
+          }
+        }
+
+        requestAnimationFrame(animateVolume);
+      }
+
+      function startCinemaMusic() {
+        if (!cinemaMusic) {
+          return;
+        }
+
+        cinemaMusic.volume = 0.20;
+        cinemaMusic.muted = false;
+
+        try {
+          cinemaMusic.currentTime = 94;
+        } catch (error) {
+          cinemaMusic.addEventListener("loadedmetadata", () => {
+            cinemaMusic.currentTime = 94;
+          }, { once: true });
+        }
+
+        const playPromise = cinemaMusic.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              if (musicStartBtn) musicStartBtn.classList.remove("show");
+              if (musicStatus) {
+                musicStatus.textContent = "♫ Música de fondo activada";
+                musicStatus.classList.add("show");
+                setTimeout(() => musicStatus.classList.remove("show"), 2200);
+              }
+            })
+            .catch(() => {
+              if (musicStartBtn) musicStartBtn.classList.add("show");
+              if (musicStatus) {
+                musicStatus.textContent = "Presiona “Activar música” para escuchar la canción.";
+                musicStatus.classList.add("show");
+              }
+            });
+        }
+      }
+
+      function lowerCinemaMusicForVideo() {
+        if (!cinemaMusic) {
+          return;
+        }
+
+        if (!cinemaMusic.paused) {
+          setCinemaMusicVolume(0.06, 1200);
+        }
+      }
+
+      function stopCinemaMusic() {
+        if (!cinemaMusic) {
+          return;
+        }
+
+        cinemaMusic.pause();
+        cinemaMusic.currentTime = 0;
+        cinemaMusic.volume = 0.78;
+      }
+
+      function fadeOutCinemaMusic() {
+        if (!cinemaMusic || cinemaMusic.paused) {
+          return;
+        }
+
+        setCinemaMusicVolume(0, 600);
+        setTimeout(() => {
+          cinemaMusic.pause();
+          cinemaMusic.currentTime = 0;
+          cinemaMusic.volume = 0.78;
+        }, 650);
+      }
+
+      function startFinalVideo() {
+        if (!anniversaryVideo) {
+          return;
+        }
+
+        if (videoStatus) {
+          videoStatus.innerHTML = "";
+        }
+
+        fadeOutCinemaMusic();
+        anniversaryVideo.muted = false;
+        anniversaryVideo.controls = true;
+
+        const playPromise = anniversaryVideo.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              if (videoPlayFallback) {
+                videoPlayFallback.classList.remove("show");
+              }
+
+              if (videoStatus) {
+                videoStatus.textContent = "";
+              }
+            })
+            .catch(() => {
+              if (videoPlayFallback) {
+                videoPlayFallback.classList.add("show");
+              }
+
+              if (videoStatus) {
+                videoStatus.innerHTML =
+                  "No se pudo reproducir. Revisa que exista <b>video/aniversario.mp4</b>.";
+              }
+            });
+        }
+      }
+
+      function loadLocalAnniversaryVideo(event) {
+        const file = event.target.files && event.target.files[0];
+
+        if (!file || !anniversaryVideo) {
+          return;
+        }
+
+        const videoUrl = URL.createObjectURL(file);
+        anniversaryVideo.src = videoUrl;
+        anniversaryVideo.load();
+
+        if (videoStatus) {
+          videoStatus.textContent = "Video cargado. Presiona reproducir.";
+        }
+
+        if (videoPlayFallback) {
+          videoPlayFallback.classList.add("show");
+        }
+      }
+
+      function prepareFinalVideo() {
+        if (!anniversaryVideo) {
+          return;
+        }
+
+        anniversaryVideo.pause();
+        anniversaryVideo.currentTime = 0;
+        anniversaryVideo.muted = false;
+        anniversaryVideo.controls = true;
+
+        if (anniversaryVideoWrap) {
+          anniversaryVideoWrap.classList.add("show");
+        }
+
+        if (videoPlayFallback) {
+          videoPlayFallback.classList.add("show");
+        }
+
+        if (videoStatus) {
+          videoStatus.textContent = "";
+        }
+      }
+
+      function showMovieFinal() {
+        clearTimeout(movieTimer);
+        clearTimeout(typingTimer);
+        movieIntro.classList.add("hide");
+        movieSlides.forEach((slide) => slide.classList.remove("active"));
+        movieCaption.textContent = "";
+        movieCaption.classList.remove("typing");
+        movieCaption.style.opacity = "0";
+        movieFinal.classList.remove("hide");
+        const movieSkipButtonFinal = document.querySelector(".movie-skip");
+        if (movieSkipButtonFinal) {
+          movieSkipButtonFinal.style.display = "none";
+        }
+        prepareFinalVideo();
+        lowerCinemaMusicForVideo();
+        movieProgress.style.width = "100%";
+        createAnniversaryMagic();
+      }
+
+      function closeAnniversary() {
+        clearTimeout(movieTimer);
+        clearTimeout(typingTimer);
+        anniversaryOverlay.classList.remove("show");
+        document.body.style.overflow = "";
+        stopCinemaMusic();
+        movieCaption.textContent = "";
+        movieCaption.classList.remove("typing");
+        movieProgress.style.width = "0%";
+        movieFinal.classList.add("hide");
+        const movieSkipButtonClose = document.querySelector(".movie-skip");
+        if (movieSkipButtonClose) {
+          movieSkipButtonClose.style.display = "";
+        }
+
+        if (anniversaryVideo) {
+          anniversaryVideo.pause();
+          anniversaryVideo.currentTime = 0;
+        }
+
+        if (anniversaryVideoWrap) {
+          anniversaryVideoWrap.classList.remove("show");
+        }
+
+        movieIntro.classList.remove("hide");
+        if (movieSlides.length) {
+          movieSlides.forEach((slide) => slide.classList.remove("active"));
+        }
+      }
+
+
+      if (anniversaryVideo) {
+        anniversaryVideo.addEventListener("play", () => {
+          fadeOutCinemaMusic();
+        });
+
+        anniversaryVideo.addEventListener("ended", () => {
+          stopCinemaMusic();
+        });
+      }
+
+      anniversaryOverlay.addEventListener("click", (event) => {
+        if (event.target === anniversaryOverlay) {
+          closeAnniversary();
+        }
+      });
+
+      function createAnniversaryMagic() {
+        const heartColors = ["#ff6b8a", "#ffd2a8", "#ff9a62", "#ffbfd0", "#ffffff"];
+        const confettiColors = ["#ff6b8a", "#ffd2a8", "#ff9a62", "#ffe15d", "#ffffff", "#d76d77"];
+
+        for (let i = 0; i < 42; i++) {
+          const heart = document.createElement("span");
+          heart.className = "floating-heart";
+          heart.textContent = i % 5 === 0 ? "✨" : "❤";
+          heart.style.setProperty("--left", Math.random() * 100 + "vw");
+          heart.style.setProperty("--size", 18 + Math.random() * 30 + "px");
+          heart.style.setProperty("--duration", 3.4 + Math.random() * 2.6 + "s");
+          heart.style.setProperty("--rotate", (Math.random() * 120 - 60) + "deg");
+          heart.style.setProperty("--color", heartColors[Math.floor(Math.random() * heartColors.length)]);
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 6500);
+        }
+
+        for (let i = 0; i < 90; i++) {
+          const confetti = document.createElement("span");
+          confetti.className = "confetti-piece";
+          confetti.style.setProperty("--left", Math.random() * 100 + "vw");
+          confetti.style.setProperty("--w", 6 + Math.random() * 8 + "px");
+          confetti.style.setProperty("--h", 10 + Math.random() * 14 + "px");
+          confetti.style.setProperty("--duration", 2.6 + Math.random() * 2.2 + "s");
+          confetti.style.setProperty("--rotate", (Math.random() * 720 - 360) + "deg");
+          confetti.style.setProperty("--color", confettiColors[Math.floor(Math.random() * confettiColors.length)]);
+          document.body.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 5200);
+        }
+      }
+
     </script>
   </body>
 </html>
