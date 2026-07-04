@@ -690,9 +690,19 @@
         text-align: center;
       }
 
-      .anniversary-card {
-        width: min(820px, 100%);
+      .anniversary-cards-grid {
+        width: min(980px, 100%);
         margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+        align-items: stretch;
+      }
+
+      .anniversary-card {
+        width: 100%;
+        height: 100%;
+        margin: 0;
         padding: 30px 22px;
         border-radius: 34px;
         background:
@@ -734,6 +744,29 @@
         color: #dfc3af;
         line-height: 1.7;
         margin-bottom: 22px;
+      }
+
+      .anniversary-date {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 14px;
+        padding: 7px 14px;
+        border-radius: 999px;
+        background: rgba(255, 125, 40, 0.12);
+        border: 1px solid rgba(255, 165, 90, 0.22);
+        color: #ffbf87;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .anniversary-card.previous {
+        opacity: 0.9;
+      }
+
+      .anniversary-card.current {
+        transform: translateY(-4px);
       }
 
       .anniversary-btn {
@@ -1249,6 +1282,16 @@
         100% { transform: translateY(110vh) rotate(var(--rotate)); opacity: 0; }
       }
 
+      @media (max-width: 820px) {
+        .anniversary-cards-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .anniversary-card.current {
+          transform: none;
+        }
+      }
+
       @media (max-width: 620px) {
         .page {
           width: 94%;
@@ -1322,19 +1365,23 @@
       <section class="carousel-section">
         <div class="carousel">
           <div class="slide active">
-            <img src="img/foto (5).jpeg" alt="Foto romántica 1" />
+            <img src="img/foto (1).jpeg" alt="Foto romántica 1" />
           </div>
 
           <div class="slide">
-            <img src="img/foto (1).jpeg" alt="Foto romántica 2" />
+            <img src="img/foto (5).jpeg" alt="Foto romántica 2" />
           </div>
 
           <div class="slide">
-            <img src="img/foto (7).jpeg" alt="Foto romántica 3" />
+            <img src="img/foto (11).jpeg" alt="Foto romántica 3" />
           </div>
 
           <div class="slide">
-            <img src="img/foto (13).jpeg" alt="Foto romántica 3" />
+            <img src="img/foto (20).jpeg" alt="Foto romántica 4" />
+          </div>
+
+          <div class="slide">
+            <img src="img/foto (31).jpeg" alt="Foto romántica 5" />
           </div>
 
           <div class="carousel-overlay">
@@ -1363,15 +1410,30 @@
 
 
       <section class="anniversary-section">
-        <div class="anniversary-card">
-          <h2>Una sorpresa para hoy</h2>
-          <p>
-            Presiona este botón y nuestras fotos se proyectarán como una pequeña película,
-            una por una, con una frase debajo que se escribirá en ese momento.
-          </p>
-          <button class="anniversary-btn" onclick="launchAnniversary()">
-            ✨ Soltar sorpresa de aniversario ✨
-          </button>
+        <div class="anniversary-cards-grid">
+          <div class="anniversary-card previous">
+            <div class="anniversary-date">03/06/2026</div>
+            <h2>Primera sorpresa</h2>
+            <p>
+              Nuestra sorpresa del primer mes queda guardada aquí, como una pequeña película
+              con las fotos, la canción y el video de ese día especial.
+            </p>
+            <button class="anniversary-btn" onclick="launchAnniversary('first')">
+              ✨ Ver sorpresa del primer mes ✨
+            </button>
+          </div>
+
+          <div class="anniversary-card current">
+            <div class="anniversary-date">03/07/2026</div>
+            <h2>Segunda sorpresa</h2>
+            <p>
+              Hoy cumplimos dos meses, así que preparé una nueva sorpresa con nuevas fotos,
+              una nueva canción y un nuevo video para este capítulo de nosotros.
+            </p>
+            <button class="anniversary-btn" onclick="launchAnniversary('second')">
+              ✨ Soltar segunda sorpresa ✨
+            </button>
+          </div>
         </div>
       </section>
 
@@ -1419,9 +1481,9 @@
         <button class="anniversary-close" onclick="closeAnniversary()">×</button>
 
         <div class="movie-intro" id="movieIntro">
-          <div class="mini">03 de junio de 2026</div>
-          <h2>Nuestra pequeña película</h2>
-          <p>
+          <div class="mini" id="movieIntroDate">03 de junio de 2026</div>
+          <h2 id="movieIntroTitle">Nuestra pequeña película</h2>
+          <p id="movieIntroText">
             Esto es todos los recuerdos que tengo contigo hasta este momento, mi amor.
           </p>
         </div>
@@ -1430,9 +1492,9 @@
         <div class="movie-caption" id="movieCaption"></div>
 
         <div class="movie-final hide" id="movieFinal">
-          <div class="mini">Elias + Ariana ❤</div>
-          <h2>Feliz primer mes</h2>
-          <p>
+          <div class="mini" id="movieFinalMini">Elias + Ariana ❤</div>
+          <h2 id="movieFinalTitle">Feliz primer mes</h2>
+          <p id="movieFinalText">
             Gracias por cada sonrisa, cada mirada y cada momento bonito. Este es
             solo el primer capítulo de todo lo que quiero vivir contigo. Te amo
             mucho, mi amor.
@@ -1522,121 +1584,153 @@
         },
         {
           src: "./img/foto (3).jpeg",
-          alt: "Ariana y Elias 1",
-        },
-        {
-          src: "./img/foto (4).jpeg",
-          alt: "Ariana y Elias 1",
-        },
-        {
-          src: "./img/foto (5).jpeg",
-          alt: "Ariana y Elias 1",
-        },
-        {
-          src: "./img/foto (6).jpeg",
-          alt: "Ariana y Elias 1",
-        },
-        {
-          src: "./img/foto (7).jpeg",
-          alt: "Ariana y Elias 1",
-        },
-        {
-          src: "./img/foto (8).jpeg",
-          alt: "Ariana y Elias 1",
-        },
-        {
-          src: "./img/foto (9).jpeg",
-          alt: "Ariana y Elias 1",
-        },
-        {
-          src: "./img/foto (10).jpeg",
-          alt: "Ariana y Elias 1",
-        },
-        {
-          src: "./img/foto (11).jpeg",
-          alt: "Ariana y Elias 1",
-        },
-        {
-          src: "./img/foto (11).jpeg",
-          alt: "Ariana y Elias 1",
-        },
-        {
-          src: "./img/foto (12).jpeg",
           alt: "Ariana y Elias 2",
         },
         {
-          src: "./img/foto (13).jpeg",
+          src: "./img/foto (4).jpeg",
           alt: "Ariana y Elias 3",
         },
         {
-          src: "./img/foto (14).jpeg",
+          src: "./img/foto (5).jpeg",
           alt: "Ariana y Elias 4",
         },
         {
-          src: "./img/foto (15).jpeg",
+          src: "./img/foto (6).jpeg",
           alt: "Ariana y Elias 5",
         },
         {
-          src: "./img/foto (16).jpeg",
+          src: "./img/foto (7).jpeg",
           alt: "Ariana y Elias 6",
         },
         {
-          src: "./img/foto (17).jpeg",
+          src: "./img/foto (8).jpeg",
           alt: "Ariana y Elias 7",
         },
         {
-          src: "./img/foto (18).jpeg",
+          src: "./img/foto (9).jpeg",
           alt: "Ariana y Elias 8",
         },
         {
-          src: "./img/foto (19).jpeg",
+          src: "./img/foto (10).jpeg",
           alt: "Ariana y Elias 9",
         },
         {
-          src: "./img/foto (20).jpeg",
+          src: "./img/foto (11).jpeg",
           alt: "Ariana y Elias 10",
         },
         {
-          src: "./img/foto (21).jpeg",
+          src: "./img/foto (12).jpeg",
           alt: "Ariana y Elias 11",
         },
         {
-          src: "./img/foto (22).jpeg",
+          src: "./img/foto (14).jpeg",
           alt: "Ariana y Elias 12",
         },
         {
-          src: "./img/foto (23).jpeg",
+          src: "./img/foto (15).jpeg",
           alt: "Ariana y Elias 13",
         },
         {
-          src: "./img/foto (24).jpeg",
+          src: "./img/foto (16).jpeg",
           alt: "Ariana y Elias 14",
         },
         {
-          src: "./img/foto (25).jpeg",
+          src: "./img/foto (17).jpeg",
           alt: "Ariana y Elias 15",
         },
         {
-          src: "./img/foto (26).jpeg",
+          src: "./img/foto (18).jpeg",
           alt: "Ariana y Elias 16",
         },
         {
-          src: "./img/foto (27).jpeg",
+          src: "./img/foto (19).jpeg",
           alt: "Ariana y Elias 17",
         },
         {
-          src: "./img/foto (28).jpeg",
+          src: "./img/foto (20).jpeg",
           alt: "Ariana y Elias 18",
         },
         {
-          src: "./img/foto (29).jpeg",
+          src: "./img/foto (21).jpeg",
           alt: "Ariana y Elias 19",
         },
         {
-          src: "./img/foto (30).jpeg",
+          src: "./img/foto (22).jpeg",
           alt: "Ariana y Elias 20",
         },
-      ];
+        {
+          src: "./img/foto (23).jpeg",
+          alt: "Ariana y Elias 21",
+        },
+        {
+          src: "./img/foto (24).jpeg",
+          alt: "Ariana y Elias 22",
+        },
+        {
+          src: "./img/foto (25).jpeg",
+          alt: "Ariana y Elias 23",
+        },
+        {
+          src: "./img/foto (26).jpeg",
+          alt: "Ariana y Elias 24",
+        },
+        {
+          src: "./img/foto (27).jpeg",
+          alt: "Ariana y Elias 25",
+        },
+        {
+          src: "./img/foto (28).jpeg",
+          alt: "Ariana y Elias 26",
+        },
+        {
+          src: "./img/foto (29).jpeg",
+          alt: "Ariana y Elias 27",
+        },
+        {
+          src: "./img/foto (30).jpeg",
+          alt: "Ariana y Elias 28",
+        },
+        {
+          src: "./img/foto (31).jpeg",
+          alt: "Ariana y Elias 29",
+        },
+        {
+          src: "./img/foto (32).jpeg",
+          alt: "Ariana y Elias 30",
+        },
+        {
+          src: "./img/foto (33).jpeg",
+          alt: "Ariana y Elias 31",
+        },
+        {
+          src: "./img/foto (34).jpeg",
+          alt: "Ariana y Elias 32",
+        },
+        {
+          src: "./img/foto (35).jpeg",
+          alt: "Ariana y Elias 33",
+        },
+        {
+          src: "./img/foto (36).jpeg",
+          alt: "Ariana y Elias 34",
+        },
+        {
+          src: "./img/foto (37).jpeg",
+          alt: "Ariana y Elias 35",
+        },
+        {
+          src: "./img/foto (38).jpeg",
+          alt: "Ariana y Elias 36",
+        },
+        {
+          src: "./img/foto (39).jpeg",
+          alt: "Ariana y Elias 37",
+        },
+        {
+          src: "./img/foto (40).jpeg",
+          alt: "Ariana y Elias 38",
+        },
+      ]
 
       galleryPhotos.forEach((photo) => {
         const card = document.createElement("button");
@@ -2004,7 +2098,65 @@ Y aunque el tiempo cambie muchas cosas, hay una que jamás cambiará.
 
 Mi decisión de amarte.
 `,
+        },
+        {
+          number: 18,
+          date: "3 de julio de 2026",
+          preview: "My one and only love",
+          text: `
+          Mi amor hermoso,
+
+Pero bueno, ¿quién más? Soy yo, tu nub ajonjolí.
+
+Hoy cumplimos 2 meses de enamorados, amor. Y aunque quizá para el mundo pueda parecer solo una fecha más, para mí significa muchísimo. Significa que han pasado dos meses desde que empezamos este camino juntos, dos meses desde que mi corazón pudo decir con alegría que te tenía a mi lado, dos meses desde que esta historia empezó a escribirse con más amor, más ternura y más verdad.
+
+Esta semana he estado algo nervioso, amor. No sé si se me nota mucho o si intento disimularlo demasiado, pero dentro de mí han pasado muchas cosas. Todo lo nuevo siempre trae un poquito de miedo, de dudas, de pensamientos dando vueltas y de preguntas que a veces no tienen respuesta inmediata.
+
+A veces siento que estoy caminando por un lugar que todavía no conozco bien. Como si cada paso tuviera algo de emoción, pero también un poco de incertidumbre. Y aun así, en medio de todo eso, hay algo que me hace sentir profundamente tranquilo: saber que estás conmigo.
+
+Saber que, de alguna forma, estás presente en cada paso que doy me da una fuerza muy bonita. No porque desaparezcan los nervios, sino porque contigo todo se siente más llevadero. Es como si tu existencia le recordara a mi corazón que no todo tiene que ser perfecto para estar bien, que no todo tiene que estar resuelto para seguir avanzando, y que incluso en los días difíciles también puede haber luz.
+
+Y esa luz, muchas veces, eres tú.
+
+No sabes cuánto bien me hace escucharte, aunque sea un ratito. No sabes cuánto puede cambiar mi día una sonrisa tuya, una palabra tuya, una pequeña señal de que estás ahí. Hay días en los que mi mente se siente cansada, en los que todo parece un poco oscuro o pesado, pero entonces apareces tú, con esa forma tan tuya de iluminarlo todo, y mi día cambia.
+
+Una sonrisa tuya es capaz de convertir mi oscuridad en luz.
+
+Por eso siempre voy a buscar una forma de verte o escucharte todos los días. Aunque sea un momento pequeño, aunque el día esté lleno, aunque el mundo se mueva rápido y las responsabilidades quieran ocuparlo todo. Porque estar cerca de ti, de la forma que sea, se ha vuelto una de las formas más bonitas que tiene mi corazón de descansar.
+
+Y hoy, justo hoy que cumplimos dos meses, me doy cuenta de algo muy bonito: no quiero que esta fecha sea solo un recuerdo. Quiero que sea una promesa. Una promesa de seguir eligiéndote, de seguir buscándote, de seguir cuidando este amor que Dios puso en nuestras manos.
+
+A veces pienso que Dios pone personas en nuestra vida no solo para acompañarnos en los días felices, sino también para recordarnos quiénes somos cuando estamos nerviosos, cansados o confundidos. Y tú has sido eso para mí, amor. Una compañía bonita. Una calma. Una razón. Una luz que no exige, pero que simplemente estando ahí me ayuda a seguir.
+
+No quiero que pienses que necesito tener todo perfecto para amarte bien. Estoy aprendiendo, creciendo y enfrentando cosas nuevas. Pero hay algo que sí tengo claro: en cada versión de mí, en cada etapa, en cada intento, mi corazón te va a buscar.
+
+Te va a buscar en una llamada.
+Te va a buscar en un mensaje.
+Te va a buscar en una mirada.
+Te va a buscar en una sonrisa.
+Te va a buscar en cada espacio pequeño donde pueda recordarte que eres importante para mí.
+
+Porque contigo no quiero solo vivir los días fáciles. También quiero aprender a caminar los días nuevos, los días raros, los días inciertos y los días donde uno no sabe muy bien qué siente, pero sabe perfectamente a quién quiere tener cerca.
+
+Y yo te quiero cerca, mi amor.
+
+Gracias por estos dos meses, por ser parte de mis días y por hacerme sentir que, aunque todo sea nuevo, no camino solo. Gracias por esa sonrisa que tiene el poder de arreglarme el alma sin que tú te des cuenta. Gracias por existir de esa forma tan bonita, tan tuya, tan especial.
+
+Hoy solo quería decirte eso: he estado nervioso, sí. Pero también me he sentido grandemente feliz de saber que estás conmigo.
+
+Y mientras pueda, voy a encontrar una forma de verte, escucharte y recordarte todos los días que te amo.
+
+Porque mi día puede empezar oscuro, pero si apareces tú, amor mío, siempre encuentra luz.
+
+Felices 2 meses, mi amor hermoso.
+
+Te amo mucho, hoy, mañana y en cada paso que venga.
+
+Con todo mi corazón,
+tu ajonjolí.
+`,
         }
+
 
       ];
 
@@ -2050,7 +2202,13 @@ Mi decisión de amarte.
       const anniversaryOverlay = document.getElementById("anniversaryOverlay");
       const movieSlidesContainer = document.getElementById("movieSlides");
       const movieIntro = document.getElementById("movieIntro");
+      const movieIntroDate = document.getElementById("movieIntroDate");
+      const movieIntroTitle = document.getElementById("movieIntroTitle");
+      const movieIntroText = document.getElementById("movieIntroText");
       const movieFinal = document.getElementById("movieFinal");
+      const movieFinalMini = document.getElementById("movieFinalMini");
+      const movieFinalTitle = document.getElementById("movieFinalTitle");
+      const movieFinalText = document.getElementById("movieFinalText");
       const movieCaption = document.getElementById("movieCaption");
       const movieProgress = document.getElementById("movieProgress");
       const cinemaMusic = document.getElementById("cinemaMusic");
@@ -2061,21 +2219,217 @@ Mi decisión de amarte.
       const videoPlayFallback = document.getElementById("videoPlayFallback");
       const videoStatus = document.getElementById("videoStatus");
 
-      const moviePhrases = [
-        "Todo empezó con una sonrisa que se volvió mi lugar favorito.",
-        "Contigo, los días simples se sienten como escenas que quiero repetir.",
-        "Tus ojitos tienen esa luz que calma mi mundo entero.",
-        "Cada foto nuestra guarda algo que mi corazón no quiere olvidar.",
-        "Un mes puede sonar poquito, pero contigo se siente gigante.",
-        "Gracias por hacerme sentir que el amor también puede ser hogar.",
-        "Quiero seguir coleccionando momentos, risas y planes contigo.",
-        "Ariana, tú eres mi capítulo más bonito de este comienzo.",
-        "Donde estés tú, mi corazón encuentra una razón para sonreír.",
-        "Cada recuerdo contigo se siente como una escena favorita.",
-        "Si pudiera repetir una escena, elegiría cualquier momento contigo.",
-        "Este primer mes es solo el tráiler de todo lo hermoso que viene.",
-        "Te amo, mi amor. Feliz primer mes.",
-      ];
+      const surprises = {
+        first: {
+          date: "03 de junio de 2026",
+          introTitle: "Nuestra pequeña película",
+          introText: "Esto es todos los recuerdos que tengo contigo hasta este momento, mi amor.",
+          finalMini: "Elias + Ariana ❤",
+          finalTitle: "Feliz primer mes",
+          finalText:
+            "Gracias por cada sonrisa, cada mirada y cada momento bonito. Este es solo el primer capítulo de todo lo que quiero vivir contigo. Te amo mucho, mi amor.",
+          music: "music/cancion.mp3",
+          musicStartAt: 94,
+          video: "video/aniversario.mp4",
+          photos: [
+            {
+              src: `img/foto (1).jpeg`,
+              alt: `Primera sorpresa 1`,
+            },
+            {
+              src: `img/foto (3).jpeg`,
+              alt: `Primera sorpresa 2`,
+            },
+            {
+              src: `img/foto (4).jpeg`,
+              alt: `Primera sorpresa 3`,
+            },
+            {
+              src: `img/foto (5).jpeg`,
+              alt: `Primera sorpresa 4`,
+            },
+            {
+              src: `img/foto (6).jpeg`,
+              alt: `Primera sorpresa 5`,
+            },
+            {
+              src: `img/foto (7).jpeg`,
+              alt: `Primera sorpresa 6`,
+            },
+            {
+              src: `img/foto (8).jpeg`,
+              alt: `Primera sorpresa 7`,
+            },
+            {
+              src: `img/foto (9).jpeg`,
+              alt: `Primera sorpresa 8`,
+            },
+            {
+              src: `img/foto (10).jpeg`,
+              alt: `Primera sorpresa 9`,
+            },
+            {
+              src: `img/foto (11).jpeg`,
+              alt: `Primera sorpresa 10`,
+            },
+            {
+              src: `img/foto (12).jpeg`,
+              alt: `Primera sorpresa 11`,
+            },
+            {
+              src: `img/foto (14).jpeg`,
+              alt: `Primera sorpresa 12`,
+            },
+            {
+              src: `img/foto (15).jpeg`,
+              alt: `Primera sorpresa 13`,
+            },
+            {
+              src: `img/foto (16).jpeg`,
+              alt: `Primera sorpresa 14`,
+            },
+            {
+              src: `img/foto (17).jpeg`,
+              alt: `Primera sorpresa 15`,
+            },
+            {
+              src: `img/foto (18).jpeg`,
+              alt: `Primera sorpresa 16`,
+            },
+            {
+              src: `img/foto (19).jpeg`,
+              alt: `Primera sorpresa 17`,
+            },
+            {
+              src: `img/foto (20).jpeg`,
+              alt: `Primera sorpresa 18`,
+            },
+            {
+              src: `img/foto (21).jpeg`,
+              alt: `Primera sorpresa 19`,
+            },
+            {
+              src: `img/foto (22).jpeg`,
+              alt: `Primera sorpresa 20`,
+            },
+            {
+              src: `img/foto (23).jpeg`,
+              alt: `Primera sorpresa 21`,
+            },
+            {
+              src: `img/foto (24).jpeg`,
+              alt: `Primera sorpresa 22`,
+            },
+            {
+              src: `img/foto (25).jpeg`,
+              alt: `Primera sorpresa 23`,
+            },
+            {
+              src: `img/foto (26).jpeg`,
+              alt: `Primera sorpresa 24`,
+            },
+            {
+              src: `img/foto (27).jpeg`,
+              alt: `Primera sorpresa 25`,
+            },
+            {
+              src: `img/foto (28).jpeg`,
+              alt: `Primera sorpresa 26`,
+            },
+            {
+              src: `img/foto (29).jpeg`,
+              alt: `Primera sorpresa 27`,
+            },
+            {
+              src: `img/foto (30).jpeg`,
+              alt: `Primera sorpresa 28`,
+            },
+          ],
+          phrases: [
+            "Todo empezó con una sonrisa que se volvió mi lugar favorito.",
+            "Contigo, los días simples se sienten como escenas que quiero repetir.",
+            "Tus ojitos tienen esa luz que calma mi mundo entero.",
+            "Cada foto nuestra guarda algo que mi corazón no quiere olvidar.",
+            "Un mes puede sonar poquito, pero contigo se siente gigante.",
+            "Gracias por hacerme sentir que el amor también puede ser hogar.",
+            "Quiero seguir coleccionando momentos, risas y planes contigo.",
+            "Ariana, tú eres mi capítulo más bonito de este comienzo.",
+            "Donde estés tú, mi corazón encuentra una razón para sonreír.",
+            "Cada recuerdo contigo se siente como una escena favorita.",
+            "Si pudiera repetir una escena, elegiría cualquier momento contigo.",
+            "Este primer mes es solo el tráiler de todo lo hermoso que viene.",
+            "Te amo, mi amor. Feliz primer mes.",
+          ],
+        },
+        second: {
+          date: "03 de julio de 2026",
+          introTitle: "Nuestra segunda película",
+          introText: "Hoy cumplimos dos meses, mi amor. Esta nueva sorpresa guarda otro pedacito de nuestra historia.",
+          finalMini: "Elias + Ariana ❤",
+          finalTitle: "Felices dos meses",
+          finalText:
+            "Dos meses contigo y cada día confirmo que eres una de las partes más bonitas de mi vida. Gracias por seguir aquí, por tu amor y por cada momento que construimos juntos. Te amo mucho, mi amor.",
+          music: "music/cancion-2.mp3",
+          musicStartAt: 0,
+          video: "video/aniversario-2.mp4",
+          photos: [
+            {
+              src: `img/foto (31).jpeg`,
+              alt: `Segunda sorpresa 1`,
+            },
+            {
+              src: `img/foto (32).jpeg`,
+              alt: `Segunda sorpresa 2`,
+            },
+            {
+              src: `img/foto (33).jpeg`,
+              alt: `Segunda sorpresa 3`,
+            },
+            {
+              src: `img/foto (34).jpeg`,
+              alt: `Segunda sorpresa 4`,
+            },
+            {
+              src: `img/foto (35).jpeg`,
+              alt: `Segunda sorpresa 5`,
+            },
+            {
+              src: `img/foto (36).jpeg`,
+              alt: `Segunda sorpresa 6`,
+            },
+            {
+              src: `img/foto (37).jpeg`,
+              alt: `Segunda sorpresa 7`,
+            },
+            {
+              src: `img/foto (38).jpeg`,
+              alt: `Segunda sorpresa 8`,
+            },
+            {
+              src: `img/foto (39).jpeg`,
+              alt: `Segunda sorpresa 9`,
+            },
+            {
+              src: `img/foto (40).jpeg`,
+              alt: `Segunda sorpresa 10`,
+            },
+          ],
+          phrases: [
+            "Dos meses contigo y todavía siento emoción por cada nuevo recuerdo.",
+            "Me encanta saber que seguimos escribiendo esta historia juntos.",
+            "Cada foto nueva es otra razón para agradecer por tenerte en mi vida.",
+            "Tu sonrisa sigue siendo mi escena favorita.",
+            "Este segundo mes me recuerda que amar también es cuidar cada detalle.",
+            "Gracias por quedarte, por ser tú y por hacer mis días más bonitos.",
+            "Quiero seguir sumando meses, planes, risas y sueños contigo.",
+            "Ariana, eres mi casualidad más bonita y mi elección más sincera.",
+            "Hoy celebro dos meses, pero mi corazón ya piensa en toda una vida.",
+            "Te amo, mi amor. Felices dos meses.",
+          ],
+        },
+      };
+
+      let activeSurprise = surprises.first;
 
       let movieTimer = null;
       let typingTimer = null;
@@ -2083,7 +2437,7 @@ Mi decisión de amarte.
       const scenePauseTime = 850;
       const afterTypingPauseTime = 1700;
 
-      function getAllMoviePhotos() {
+      function getDefaultMoviePhotos() {
         const carouselPhotos = Array.from(
           document.querySelectorAll(".carousel .slide img"),
         ).map((img, index) => ({
@@ -2103,6 +2457,31 @@ Mi decisión de amarte.
         });
       }
 
+      function getAllMoviePhotos() {
+        return activeSurprise.photos || getDefaultMoviePhotos();
+      }
+
+      function applySurpriseContent() {
+        if (movieIntroDate) movieIntroDate.textContent = activeSurprise.date;
+        if (movieIntroTitle) movieIntroTitle.textContent = activeSurprise.introTitle;
+        if (movieIntroText) movieIntroText.textContent = activeSurprise.introText;
+        if (movieFinalMini) movieFinalMini.textContent = activeSurprise.finalMini;
+        if (movieFinalTitle) movieFinalTitle.textContent = activeSurprise.finalTitle;
+        if (movieFinalText) movieFinalText.textContent = activeSurprise.finalText;
+
+        if (cinemaMusic) {
+          cinemaMusic.pause();
+          cinemaMusic.src = activeSurprise.music;
+          cinemaMusic.load();
+        }
+
+        if (anniversaryVideo) {
+          anniversaryVideo.pause();
+          anniversaryVideo.src = activeSurprise.video;
+          anniversaryVideo.load();
+        }
+      }
+
       function buildMovieSlides() {
         movieSlidesContainer.innerHTML = "";
         const moviePhotos = getAllMoviePhotos();
@@ -2117,7 +2496,9 @@ Mi decisión de amarte.
         movieSlides = document.querySelectorAll(".movie-slide");
       }
 
-      function launchAnniversary() {
+      function launchAnniversary(surpriseKey = "first") {
+        activeSurprise = surprises[surpriseKey] || surprises.first;
+        applySurpriseContent();
         anniversaryOverlay.classList.add("show");
         document.body.style.overflow = "hidden";
         createAnniversaryMagic();
@@ -2191,7 +2572,7 @@ Mi decisión de amarte.
           movieSlides[index].classList.add("active");
           movieProgress.style.width = `${((index + 1) / (movieSlides.length + 1)) * 100}%`;
 
-          const phrase = moviePhrases[index % moviePhrases.length];
+          const phrase = activeSurprise.phrases[index % activeSurprise.phrases.length];
           typeMovieCaption(phrase, () => {
             movieTimer = setTimeout(() => {
               showMovieScene(index + 1);
@@ -2230,10 +2611,10 @@ Mi decisión de amarte.
         cinemaMusic.muted = false;
 
         try {
-          cinemaMusic.currentTime = 94;
+          cinemaMusic.currentTime = activeSurprise.musicStartAt || 0;
         } catch (error) {
           cinemaMusic.addEventListener("loadedmetadata", () => {
-            cinemaMusic.currentTime = 94;
+            cinemaMusic.currentTime = activeSurprise.musicStartAt || 0;
           }, { once: true });
         }
 
@@ -2325,7 +2706,7 @@ Mi decisión de amarte.
 
               if (videoStatus) {
                 videoStatus.innerHTML =
-                  "No se pudo reproducir. Revisa que exista <b>video/aniversario.mp4</b>.";
+                  `No se pudo reproducir. Revisa que exista <b>${activeSurprise.video}</b>.`;
               }
             });
         }
