@@ -1348,18 +1348,30 @@
 
       }
     </style>
+    <link rel="stylesheet" href="archivo-intimo.css" />
   </head>
 
   <body>
     <main class="page">
+      <header class="site-header">
+        <a href="#inicio" class="site-logo" aria-label="Elias y Ariana, inicio">E <span class="logo-separator">&</span> A</a>
+        <nav class="site-nav" aria-label="Secciones de nuestra historia">
+          <a href="#recuerdos">Recuerdos</a>
+          <a href="#aniversarios">Aniversarios</a>
+          <a href="#cartas">Cartas</a>
+        </nav>
+        <span class="header-number">UN RINCÓN PARA DOS</span>
+      </header>
+      <div class="story-opening" id="inicio">
       <section class="hero">
         <div class="eyebrow">❤️ Un rincón hecho solo para ti</div>
-        <h1>Para Ariana, el amor de mi vida</h1>
+        <h1><span class="hero-line">Para <em>Ariana,</em></span> <span class="hero-line">el amor de mi vida</span></h1>
         <p>
           Este espacio es para guardar cada carta que escriba pensando en ti.
           Cada palabra, cada recuerdo y cada detalle estará aquí, como una forma
           de recordarte lo mucho que significas para mí.
         </p>
+        <span class="hero-endmark" aria-hidden="true"></span>
       </section>
 
       <section class="carousel-section">
@@ -1388,14 +1400,20 @@
             Nuestros momentos favoritos estarán aquí
           </div>
 
-          <button class="carousel-btn prev" onclick="moveSlide(-1)">‹</button>
-          <button class="carousel-btn next" onclick="moveSlide(1)">›</button>
+          <button class="carousel-btn prev" aria-label="Fotografía anterior" onclick="moveSlide(-1)">‹</button>
+          <button class="carousel-btn next" aria-label="Fotografía siguiente" onclick="moveSlide(1)">›</button>
         </div>
 
         <div class="dots" id="dots"></div>
       </section>
 
-      <section class="gallery-entry-section">
+      </div>
+      <section class="prologue" aria-label="Nuestra historia">
+        <span class="section-index">01 &nbsp; / &nbsp; Nuestra historia</span>
+        <p>Una historia contada con <em>imágenes, cartas</em> y los días que seguimos recordando.</p>
+      </section>
+
+      <section class="gallery-entry-section" id="recuerdos">
         <button class="gallery-entry-card" onclick="openGalleryPage()">
           <span>📸 Recuerdos nuestros</span>
           <h2>Galería de los dos</h2>
@@ -1409,7 +1427,11 @@
 
 
 
-      <section class="anniversary-section">
+      <section class="anniversary-section" id="aniversarios">
+        <div class="chapter-heading">
+          <span class="label">02 &nbsp; / &nbsp; Capítulos</span>
+          <h2>Los días que volvemos <em>a celebrar.</em></h2>
+        </div>
         <div class="anniversary-cards-grid">
           <div class="anniversary-card previous">
             <div class="anniversary-date">03/06/2026</div>
@@ -1437,7 +1459,7 @@
         </div>
       </section>
 
-      <section class="letters-section">
+      <section class="letters-section" id="cartas">
         <div class="section-header">
           <h2>Mis cartas para ti</h2>
           <p>Cada casillero guarda una carta escrita con mucho amor.</p>
@@ -1478,7 +1500,7 @@
         </button>
         <div class="music-status" id="musicStatus"></div>
         <button class="movie-skip" onclick="showMovieFinal()">Ver final ✨</button>
-        <button class="anniversary-close" onclick="closeAnniversary()">×</button>
+        <button class="anniversary-close" aria-label="Cerrar sorpresa" onclick="closeAnniversary()">×</button>
 
         <div class="movie-intro" id="movieIntro">
           <div class="mini" id="movieIntroDate">03 de junio de 2026</div>
@@ -1524,14 +1546,14 @@
 
     <div class="photo-modal" id="photoModal">
       <div class="photo-modal-content">
-        <button class="photo-close-btn" onclick="closePhoto()">×</button>
+        <button class="photo-close-btn" aria-label="Cerrar fotografía" onclick="closePhoto()">×</button>
         <img id="photoModalImg" src="" alt="Foto de nuestra galería" />
       </div>
     </div>
 
     <div class="modal" id="letterModal">
       <article class="letter-page">
-        <button class="close-btn" onclick="closeLetter()">×</button>
+        <button class="close-btn" aria-label="Cerrar carta" onclick="closeLetter()">×</button>
         <h2 id="modalTitle">Para mi amor #5</h2>
         <div class="date" id="modalDate">20 de mayo de 2026</div>
         <div class="letter-text" id="modalText"></div>
