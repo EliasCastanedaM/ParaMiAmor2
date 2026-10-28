@@ -1,0 +1,1314 @@
+
+      const slides = document.querySelectorAll(".slide");
+      const dotsContainer = document.getElementById("dots");
+      let currentSlide = 0;
+
+      slides.forEach((_, index) => {
+        const dot = document.createElement("button");
+        dot.className = "dot" + (index === 0 ? " active" : "");
+        dot.onclick = () => showSlide(index);
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = document.querySelectorAll(".dot");
+
+      function showSlide(index) {
+        slides[currentSlide].classList.remove("active");
+        dots[currentSlide].classList.remove("active");
+
+        currentSlide = (index + slides.length) % slides.length;
+
+        slides[currentSlide].classList.add("active");
+        dots[currentSlide].classList.add("active");
+      }
+
+      function moveSlide(direction) {
+        showSlide(currentSlide + direction);
+      }
+
+      setInterval(() => {
+        moveSlide(1);
+      }, 5000);
+
+      const mainPage = document.querySelector(".page");
+      const galleryPage = document.getElementById("galleryPage");
+      const photosGrid = document.getElementById("photosGrid");
+      const photoModal = document.getElementById("photoModal");
+      const photoModalImg = document.getElementById("photoModalImg");
+
+      const galleryPhotos = [
+        {
+          src: "./img/foto (1).jpeg",
+          alt: "Ariana y Elias 1",
+        },
+        {
+          src: "./img/foto (3).jpeg",
+          alt: "Ariana y Elias 2",
+        },
+        {
+          src: "./img/foto (4).jpeg",
+          alt: "Ariana y Elias 3",
+        },
+        {
+          src: "./img/foto (5).jpeg",
+          alt: "Ariana y Elias 4",
+        },
+        {
+          src: "./img/foto (6).jpeg",
+          alt: "Ariana y Elias 5",
+        },
+        {
+          src: "./img/foto (7).jpeg",
+          alt: "Ariana y Elias 6",
+        },
+        {
+          src: "./img/foto (8).jpeg",
+          alt: "Ariana y Elias 7",
+        },
+        {
+          src: "./img/foto (9).jpeg",
+          alt: "Ariana y Elias 8",
+        },
+        {
+          src: "./img/foto (10).jpeg",
+          alt: "Ariana y Elias 9",
+        },
+        {
+          src: "./img/foto (11).jpeg",
+          alt: "Ariana y Elias 10",
+        },
+        {
+          src: "./img/foto (12).jpeg",
+          alt: "Ariana y Elias 11",
+        },
+        {
+          src: "./img/foto (14).jpeg",
+          alt: "Ariana y Elias 12",
+        },
+        {
+          src: "./img/foto (15).jpeg",
+          alt: "Ariana y Elias 13",
+        },
+        {
+          src: "./img/foto (16).jpeg",
+          alt: "Ariana y Elias 14",
+        },
+        {
+          src: "./img/foto (17).jpeg",
+          alt: "Ariana y Elias 15",
+        },
+        {
+          src: "./img/foto (18).jpeg",
+          alt: "Ariana y Elias 16",
+        },
+        {
+          src: "./img/foto (19).jpeg",
+          alt: "Ariana y Elias 17",
+        },
+        {
+          src: "./img/foto (20).jpeg",
+          alt: "Ariana y Elias 18",
+        },
+        {
+          src: "./img/foto (21).jpeg",
+          alt: "Ariana y Elias 19",
+        },
+        {
+          src: "./img/foto (22).jpeg",
+          alt: "Ariana y Elias 20",
+        },
+        {
+          src: "./img/foto (23).jpeg",
+          alt: "Ariana y Elias 21",
+        },
+        {
+          src: "./img/foto (24).jpeg",
+          alt: "Ariana y Elias 22",
+        },
+        {
+          src: "./img/foto (25).jpeg",
+          alt: "Ariana y Elias 23",
+        },
+        {
+          src: "./img/foto (26).jpeg",
+          alt: "Ariana y Elias 24",
+        },
+        {
+          src: "./img/foto (27).jpeg",
+          alt: "Ariana y Elias 25",
+        },
+        {
+          src: "./img/foto (28).jpeg",
+          alt: "Ariana y Elias 26",
+        },
+        {
+          src: "./img/foto (29).jpeg",
+          alt: "Ariana y Elias 27",
+        },
+        {
+          src: "./img/foto (30).jpeg",
+          alt: "Ariana y Elias 28",
+        },
+        {
+          src: "./img/foto (31).jpeg",
+          alt: "Ariana y Elias 29",
+        },
+        {
+          src: "./img/foto (32).jpeg",
+          alt: "Ariana y Elias 30",
+        },
+        {
+          src: "./img/foto (33).jpeg",
+          alt: "Ariana y Elias 31",
+        },
+        {
+          src: "./img/foto (34).jpeg",
+          alt: "Ariana y Elias 32",
+        },
+        {
+          src: "./img/foto (35).jpeg",
+          alt: "Ariana y Elias 33",
+        },
+        {
+          src: "./img/foto (36).jpeg",
+          alt: "Ariana y Elias 34",
+        },
+        {
+          src: "./img/foto (37).jpeg",
+          alt: "Ariana y Elias 35",
+        },
+        {
+          src: "./img/foto (38).jpeg",
+          alt: "Ariana y Elias 36",
+        },
+        {
+          src: "./img/foto (39).jpeg",
+          alt: "Ariana y Elias 37",
+        },
+        {
+          src: "./img/foto (40).jpeg",
+          alt: "Ariana y Elias 38",
+        },
+      ]
+
+      galleryPhotos.forEach((photo) => {
+        const card = document.createElement("button");
+        card.className = "photo-card";
+        card.onclick = () => openPhoto(photo.src);
+        card.innerHTML = `
+          <img src="${photo.src}" alt="${photo.alt}" />
+        `;
+        photosGrid.appendChild(card);
+      });
+
+      function openGalleryPage() {
+        mainPage.style.display = "none";
+        galleryPage.classList.add("show");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function backToMain() {
+        galleryPage.classList.remove("show");
+        mainPage.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function openPhoto(src) {
+        photoModalImg.src = src;
+        photoModal.classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closePhoto() {
+        photoModal.classList.remove("show");
+        photoModalImg.src = "";
+        document.body.style.overflow = "";
+      }
+
+      photoModal.addEventListener("click", (event) => {
+        if (event.target === photoModal) {
+          closePhoto();
+        }
+      });
+
+      const letters = [
+        {
+          number: 5,
+          date: "20 de mayo de 2026",
+          preview: "La primera carta de este rincón especial.",
+          text: `Pero bueno, ¿quién más? Soy yo, ajonjolí.
+
+Te amo amor, espero que te guste este intento de página, que no será perfecto, pero está hecho con amor, un amor tan puro que puede saltar de mi corazón.
+
+Hoy es un día diferente en la rutina, pero también es el inicio de nuevas aventuras.
+
+Te quiero acompañar toda la vida, porque tu mano siempre quiero tomar. Tus bellos ojitos no deben llorar porque acabó una etapa.
+
+Porque aquí estamos tú y yo, y el futuro es incierto. Pero nos tenemos el uno al otro, y Dios sabe que siempre estaré para ti, amor mío.
+
+Te amo mucho.`,
+        },
+        {
+          number: 6,
+          date: "21 de mayo de 2026",
+          preview: "Una carta para acompañarte en esta nueva etapa.",
+          text: `Oh, amor hermoso, te saluda tu ajonjolí.
+
+Amor, entiendo que esta es una nueva etapa para ti. Sé que volver a empezar en un trabajo puede traer nervios, cambios y muchas emociones, pero quiero recordarte algo: toma siempre lo bueno y no permitas que lo malo apague tu luz.
+
+Aquí tienes a tu amorshito para recordarte siempre todo lo que eres: la mujer más encantadora del mundo, capaz de iluminar una sala con tu increíble sonrisa y tu hermosa risa. Tienes una inteligencia que sé que te llevará muy lejos, porque tú puedes lograr todo lo que te propongas.
+
+También tienes una fuerza inigualable, una mente fuerte en cada situación y una energía increíble… incluso para cargarme, jaja. Eres todo eso y mucho más, amorshito.
+
+Quiero estar siempre ahí para ti: para darte un fuerte abrazo, un beso lleno de amor y, cuando no pueda estar presente físicamente, darte todo mi apoyo y cariño por todos los medios posibles. Ánimo, ánimo, ánimo. Yo creo en ti con todo mi corazón.
+
+Te mando todo mi amor, mi amorshito. Eres el amor de mi vida y la razón de mi sonrisa. Me has enseñado, y me sigues enseñando cada día, lo bonito que es amar.
+
+Te amo mucho, mi amorcito, y siempre te amaré, hasta mi último aliento.`,
+        },
+        {
+          number: 7,
+          date: "22 de mayo de 2026",
+          preview: "Siempre serás mi amor",
+          text: `El mundo a veces parece un caos, y en medio de todo eso siento el deseo de proteger y salvar todo lo que amo. Hay días en los que me siento débil, y otros en los que encuentro una fuerza que no sabía que tenía. Frente a estas circunstancias, podemos elegir entre rendirnos ante la desesperación o vivir con valentía para enfrentar lo que venga.
+
+Sin duda, tengo muchas razones por las que no puedo quedarme de brazos cruzados. Tengo a mi familia, y te tengo a ti, que también eres mi familia. Pensar que ahora deseo muchas cosas que en algún momento dejé de lado me asusta un poco, pero saber que todo tiene sentido porque es contigo me da fuerzas para seguir adelante.
+
+Creo que esas son las cosas que Dios pone en nuestro camino: personas que nos ayudan a ser mejores. Y tú, sin duda, tocaste mi corazón para sanar lo que era, mejorar lo que soy y convertirme en alguien más fuerte de lo que fui.
+
+Pensar que Dios cerró algunos caminos antes para permitirme vivirlos contigo me alegra aún más. Porque antes no quería nada, pero contigo lo quiero todo.
+
+Amor mío, lo que quiero decir con todo esto es que quizá mi brazo no sea el más fuerte, pero mi corazón nunca se rendirá ante lo que Dios me mandó a hacer: amarte, cuidarte y elegirte para toda la vida.
+
+Porque te amo, amor. Y este amor es para toda la vida.`,
+        },
+        {
+          number: 8,
+          date: "23 de mayo de 2026",
+          preview: "No Conozco a Mi Corazón",
+          text: `A veces pongo títulos porque quiero hablar de ciertos temas, pero otras veces simplemente dejo salir lo que tengo en la mente. Como si mi misión fuera vaciar el vaso de mis pensamientos y dejar que todo fluya.
+
+Sé que lo he mencionado muchas veces, pero puedo decir sinceramente que una de las cosas que más me enamoró de ti fue querer escucharte todo el día. Escuchar tu voz, saber cómo estuvo tu día o simplemente oír cualquier cosa que quieras contarme. También están tus ojos, esos ojos tan hermosos en los que podría quedarme mirando por horas, sin importar el cansancio o lo pesado que haya sido el día.
+
+Te amo tanto que quizá no puedas imaginarlo. Y aun así, a veces siento que todavía no te conozco por completo. No porque estés lejos de mí, sino porque cada día descubro algo nuevo de ti, de nosotros y de la forma en que somos cuando estamos juntos.
+
+Cuando estoy contigo me siento auténtico, y eso me sorprende mucho de mí. La mayoría de personas que me conocen saben que suelo preferir el silencio y la soledad. Incluso en casa, cuando necesito estar solo, simplemente me alejo. Pero contigo algo cambia. Contigo quiero hablar, escuchar, compartir y ser mejor.
+
+Si intento mejorar, es porque siento que debo honrar a las personas que alguna vez vieron por mí: Dios, que siempre estuvo conmigo; mis padres, que siempre me apoyaron; y ahora tú, que también te has vuelto parte importante de mi vida. No quiero que nadie piense que estás con alguien sin educación, sin valores o sin ganas de crecer.
+
+Al final, solo me importan los míos. Y tú eres parte de eso. Quiero ser alguien que te haga reír, alguien que despierte tu interés, alguien en quien puedas confiar y a quien busques cuando necesites sentirte acompañada.
+
+Porque no conozco todo de ti, así como tú tampoco conoces todo de mí. Pero quiero seguir descubriéndote. Quiero conocer tu corazón, entenderlo, cuidarlo y aprender de él con paciencia.
+
+Tal vez por eso digo que no conozco a mi corazón. Porque mi corazón eres tú, y todavía hay mucho de ti que quiero descubrir. Quiero saber qué esconden tus bellos ojos, qué guarda tu alma y qué siente tu corazón cuando callas.
+
+Te amo, mi amor. Y quiero que sepas que voy a seguir buscando tu corazón, no para cambiarlo, sino para entenderlo mejor.
+
+Porque el mío está en tus manos.`,
+        },
+        {
+          number: 9,
+          date: "25 de mayo de 2026",
+          preview: "La razón",
+          text: `Como te lo dije antes, a veces no sé muy bien qué escribir. Pero me encanta hacerlo, porque cuando escribo siento que mi mente empieza a hablar en voz alta y que mi corazón, en esas pocas oportunidades, por fin puede expresarse.
+
+Rara vez leo algo por completo, a menos que realmente llame mi atención. Supongo que eso es normal. Tal vez por eso digo tanto que lo que más he leído son mis propias notas o cartas. Por alguna razón, cuando escribo, siento que solo lo hago de verdad cuando mi corazón y mi mente se mueven al mismo tiempo por alguien.
+
+Y tú eres una de esas personas.
+
+Tú mueves mi mente y mi corazón. Porque siempre estás ahí, incluso sin intentarlo. Estás en mis pensamientos, en mis días y hasta en mis sueños, aunque no lo sepas.
+
+Nub mía, sigue inspirando mi pluma y mi razón. Sigue siendo la musa de mis obras de arte y el coro de mi canción. Sigue siendo esa luz en la habitación y la razón por la que mi cabeza fría siempre busca, de una u otra forma, una charla contigo.
+
+Voy a verte hoy, y mi corazón no deja de latir con emoción.
+
+Espérame, amor.
+Ya voy.`,
+        },
+        {
+          number: 10,
+          date: "26 de mayo de 2026",
+          preview: "Mi corazón",
+          text: `Mi amor hermoso, mi lucero
+
+Pero bueno, ¿quién más? Soy yo, tu nub ajonjolí.
+
+Hoy quiero escribirte sobre algo que siento cada vez que te miro, cada vez que te escucho y cada vez que pienso en ti: la enorme admiración que tengo por ti.
+
+Amor, admiro tu forma de ser, tu corazón, tu manera de seguir adelante incluso cuando las cosas no son fáciles. Admiro tu sonrisa, esa que puede cambiarme el día completo. Admiro tus ojitos, mi lucero hermoso, porque en ellos encuentro paz, ternura y una razón más para agradecerle a Dios por tenerte en mi vida.
+
+Me siento tan orgulloso de ti, mi amor. Orgulloso de la mujer que eres, de lo que has logrado, de lo que estás construyendo y de todo lo que todavía vas a alcanzar. A veces quizá tú no notas lo increíble que eres, pero yo sí lo veo. Veo tu esfuerzo, tu luz, tu inteligencia, tu dulzura y esa fuerza tan bonita que llevas dentro.
+
+Y también me siento orgulloso de poder decir que eres mi amor hermoso. Orgulloso de caminar a tu lado, de poder cuidarte, acompañarte y elegirte cada día. Porque tenerte en mi vida no es cualquier cosa, es una bendición que valoro con todo mi corazón.
+
+Eres el lucero de mis ojos, amor mío. Esa luz que aparece incluso en mis días más grises. Esa personita que hace que mi corazón se sienta en casa. Esa mujer que admiro no solo porque la amo, sino porque cada día me demuestra que mi amor está en manos de alguien maravillosa.
+
+Quiero que nunca olvides esto: yo creo en ti, estoy orgulloso de ti y te admiro con todo mi corazón. Y aunque tal vez no siempre encuentre las palabras perfectas para decirlo, mi amor por ti siempre va a intentar demostrarlo.
+
+Te amo mucho, mi amor hermoso.
+Mi lucero, mi orgullo, mi razón bonita.`,
+        },
+        {
+          number: 11,
+          date: "28 de mayo de 2026",
+          preview: "Una estrella en el cielo",
+          text: `Durante mucho tiempo, las estrellas parecían solo pequeños puntos de luz en el cielo. Hermosas, sí, pero lejanas e imposibles de comprender del todo. Hasta que el ser humano pudo mirarlas más de cerca y entendió que no eran simples luces, sino soles inmensos brillando desde una distancia infinita. A veces, algo puede estar frente a nosotros toda la vida, pero solo cuando logramos verlo de verdad entendemos su grandeza.
+
+Este ejemplo me sirve para explicar un poco lo que siento hoy. Hay cosas que uno puede imaginar, escuchar o incluso intentar comprender, pero que solo se entienden verdaderamente cuando se viven en carne propia. Como aquellas personas que alguna vez sufrieron malos tratos o se sintieron apartadas en la escuela. Ellas saben de primera mano lo que significa sentirse solas, diferentes o separadas del resto. Por eso pueden mirar con más empatía a quienes pasan por lo mismo, porque conocen ese sentimiento. Porque alguna vez probaron de la cuchara de la soledad.
+
+Y así también me pasó contigo y con el amor.
+
+Yo sabía que el amor existía. Había escuchado hablar de él, quizá incluso creí entenderlo en algún momento. Pero solo cuando llegaste tú pude verlo con mis propios ojos y sentirlo dentro de mí. De una manera callada, dulce e inocente, tocaste mi alma y me hiciste ver el amor como nunca antes lo había visto y como sé que nunca volveré a verlo.
+
+Encendiste en mí un amor verdadero. Un amor que me convierte en una mejor persona, porque me enseñaste lo hermoso que es amar. No lo hiciste con grandes discursos ni con promesas perfectas, sino simplemente siendo tú. Con tu forma de existir, con tu manera de mirar el mundo, con la ternura que llevas dentro y con todo eso que te hace tan única.
+
+Eres todo eso, mi amor. Sin intención, solo existiendo y siendo como eres, le enseñaste a mi corazón a amar de verdad. A amar con letras mayúsculas.
+
+Te amo, amor. Hoy, mañana y siempre.`,
+        },
+       {
+          number: 12,
+          date: "29 de mayo de 2026",
+          preview: "Un amor real",
+          text: `Mi amor,
+
+A veces pienso que el amor verdadero no necesita ser perfecto para ser hermoso. Lo nuestro es humano, auténtico, intenso y sincero. Es de esos amores que no solo se dicen con palabras, sino que se sienten en la mirada, en la sonrisa, en el corazón y hasta en el alma.
+
+Cuando estamos juntos, puedo ver tus ojos brillar como brillan los míos. Puedo ver tu sonrisa encontrándose con la mía, y sentir cómo tu alegría despierta la mía cada vez que te veo.
+
+Pienso en ti todos los días, amor, y cada pensamiento me recuerda lo especial que eres para mí. Hay algo en ti que alegra mi corazón, que ilumina mis días y que me hace sentir agradecido por tenerte en mi vida. Tu forma de ser, tu mirada y tu sonrisa hacen que lo que siento por ti crezca cada vez más, de una manera sincera, profunda y bonita.
+
+Quiero seguir aprendiendo a tu lado, aprender de ti, de nosotros y de este amor que Dios puso en nuestras manos. Porque desde que llegaste a mi vida, entendí que amar no es solo sentir, también es cuidar, valorar, comprender y elegir con el corazón.
+
+Sé que todavía tengo mucho por aprender y reconozco mis errores, pero también reconozco algo con toda mi alma. Lo que siento por ti es tan grande, tan puro y tan verdadero, que parece tocar el cielo.
+
+Amor, mis ojos siempre te mirarán con admiración. Mi sonrisa siempre reflejará lo que mi alma siente por ti. Y mi corazón, hoy y siempre, será tuyo.
+
+Te amo, mi amor. Porque contigo entendí que el amor más bonito no es el perfecto, sino el que se cuida, se elige y se construye con el alma.`,
+        },
+
+        {
+          number: 13,
+          date: "01 de junio de 2026",
+          preview: "Lo bello que llevas dentro",
+          text: `Mi amor, Ariana:
+
+A veces siento que una de mis misiones más bonitas es recordarte algo que quizá tú misma olvidas: lo bello que es tu corazón y lo hermosa que es tu alma. Porque hay personas que brillan por lo que tienen, por lo que muestran o por lo que el mundo puede ver fácilmente; pero tú brillas de una forma distinta, más profunda y más verdadera.
+
+Tu valor no está en lo material, ni en lo que puedas poseer, ni en lo que los demás puedan medir con los ojos. Tu valor está en quién eres. Está en tu forma de sentir, en tu manera de cuidar, en la ternura que llevas dentro, en la luz que das incluso cuando no te das cuenta. Hay cosas que el dinero puede comprar, pero jamás podrá comprar un corazón sincero, una mirada noble, una presencia que da calma o un alma que transmite paz.
+
+Y eso es lo que yo veo en ti.
+
+Veo a una persona valiosa no por lo que tiene, sino por lo que es. Por su esencia, por su manera de amar, por su forma de existir en este mundo. Y por eso quiero recordártelo siempre: no necesitas compararte con nadie, no necesitas demostrar más de lo que ya eres, porque en ti ya existe una belleza que no se puede fingir ni reemplazar.
+
+Te recordaré todo esto, amor, porque todo esto eres. Y si no lo sabías, aquí estoy yo para recordarte lo bello de tu interior, lo grande de tu corazón y lo especial que es tu alma.
+
+Tu corazón es bello, mi amor. Tu alma también. Y mientras pueda, quiero ser esa voz que te lo recuerde cuando el mundo sea pesado, cuando dudes de ti o cuando olvides lo especial que eres.
+
+Con mucho cariño,`,
+        },
+        
+        {
+          number: 14,
+          date: "03 de junio de 2026",
+          preview: "El secreto",
+          text: `Disculpa no he escrito en estos dias, pero no se porque esta historia no sale de mi mente. Aunque soy una persona de poca lectura me gusta mucho escribir.
+          Y entre mis escritos quise dar el doble de medida que suelo dar, asi como la dedicación y amor. Espero te guste y puedas sentir lo mismo que yo al escribirlo.
+
+
+          """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+          Había una vez, en un valle tranquilo donde las estrellas bajaban un poquito más cerca de la tierra, dos personitas que caminaban por caminos distintos, aunque sin saberlo, sus pasos siempre apuntaban al mismo lugar.
+
+Él era un muchacho de corazón grande, tan grande que a veces le pesaba en el pecho. Amaba mucho a aquella muchacha de mirada dulce, pero dentro de sí guardaba un pensamiento pequeñito y triste, como una nube gris escondida detrás del sol.
+
+—Quizá no soy suficiente para ella —susurraba él algunas noches, mirando la luna.
+
+Y la luna, sabia y callada, no respondía. Solo brillaba.
+
+La muchacha, por su parte, caminaba con una luz muy especial en los ojos. No era una luz cualquiera. Era de esas luces que no se apagan con el viento ni con la distancia. Era una luz que esperaba, aunque todavía no sabía exactamente qué esperaba.
+
+Pasaron los días, pasaron las tardes, y una noche suave, de esas noches donde todo parece hablar bajito, el muchacho tuvo la oportunidad de caminar junto a ella.
+
+El cielo estaba oscuro, pero no daba miedo. Las estrellas parecían pequeñas velitas encendidas solo para ellos.
+
+Entonces, él respiró profundo.
+
+Miró su mano.
+
+Miró la mano de ella.
+
+Y con mucho cuidado, como quien toca algo sagrado, tomó su mano.
+
+La muchacha no la soltó.
+
+Y en ese momento, el corazón del muchacho hizo pum, pum, pum, como tamborcito emocionado.
+
+Él bajó la mirada, suspiró y observó con detalle aquel instante, como si el mundo entero se hubiera quedado quieto para escuchar.
+
+—Tengo algo guardado —dijo él con voz bajita—. Algo que nunca le he entregado a nadie.
+
+La muchacha lo miró con atención.
+
+Él sintió miedo, pero también sintió valentía. Porque hay secretos que no pesan cuando se entregan a la persona correcta.
+
+Entonces abrió su corazón, como quien abre una cajita de madera donde guarda lo más valioso de sí mismo, y le reveló su mayor secreto:
+
+—Desde hace mucho, tú eres mi lugar favorito. Pero a veces tuve miedo de no ser suficiente para ti.
+
+La muchacha no se rió.
+No se alejó.
+No soltó su mano.
+
+Solo lo miró.
+
+Y sus ojos brillaron.
+
+Pero no brillaron como brillan las cosas bonitas de lejos. Brillaron igual que los ojos de él. Con la misma ternura. Con el mismo miedo. Con la misma esperanza.
+
+Entonces él comprendió algo maravilloso.
+
+No era solo él quien había esperado.
+No era solo él quien había sentido.
+No era solo él quien había guardado amor en silencio.
+
+Ella también tenía una luz escondida.
+
+Y esa noche, bajo el cielo lleno de estrellas, el destino sonrió como un abuelo sabio que por fin termina de atar un lazo.
+
+Porque aquellas dos personas, que durante tanto tiempo habían caminado sin saberlo, estaban unidas por hilos invisibles. Hilos suaves. Hilos dorados. Hilos hechos del más puro amor.
+
+Y desde entonces, cuando el viento pasaba entre los árboles, parecía decir:
+
+—Algunas almas no se encuentran por casualidad. Algunas almas solo esperan el momento exacto para reconocerse.
+
+Y así, tomados de la mano, entendieron que hay amores que no nacen de prisa, ni se apagan con el tiempo.
+
+Hay amores que permanecen.
+
+Como las estrellas.
+Como la luna.
+Como dos luces que, por fin, descubren que siempre brillaron para encontrarse.`,
+        },
+         {
+          number: 15,
+          date: "11 de junio de 2026",
+          preview: "El invierno",
+          text: `Amor mío, hace frío a pesar de que el sol resplandece. Mi vista se nubla, aunque la luz del sol sea radiante. Tal vez solo reflejo el sentir de mi alma y la voz de mi cabeza.
+
+Tengo una familia maravillosa, que siempre busca mi bien, y en esa familia estás tú, amor, llenando de felicidad este corazón que a veces se siente vacío. Por eso están los pensamientos en mi cabeza, por eso está este sentir en mi corazón. Todo lo que tengo lo aprecio como lo más preciado de mi vida, porque también habita en mí el miedo a perderlo. Y quien teme perder es porque reconoce el inmenso valor de lo que posee; porque solo se cuida con tanta intensidad aquello que se ama profundamente y se considera verdaderamente invaluable.
+
+Veo el sol nublado y siento frío incluso en medio del calor, por todo lo que pasa en el día a día. Pero tengo una fe rebelde ante las circunstancias, una fe que se opondrá a todo obstáculo con tal de encontrar un tiempo contigo, con tal de hallar el camino que me lleve a tu corazón.
+
+Tengo fe en que, sin importar la circunstancia, todo estará bien, porque nuestros corazones se buscan sin cesar. Sin importar nada, mi corazón te buscará, y el tuyo también me encontrará. Y cuando eso pase, ambos se hallarán.
+
+Toma mi mano, amor mío. Hace frío, pero seremos calor el uno para el otro. El día se ve nublado, pero seremos luz y claridad mutuamente. Todo eso seremos, porque sin importar cuánto frío haga, te buscaré, aunque el invierno sea feroz.
+
+`,
+        },
+
+               {
+          number: 16,
+          date: "12 de junio de 2026",
+          preview: "We get colder",
+          text: `Míranos, amor. Ya llegamos a 39 días como enamorados y 125 días desde que empezamos a salir.
+
+Amor mío, los días pasarán, y lo nuevo algún día dejará de llamarse nuevo, así como también pasarán los años. Todo pasará. Dicen que el tiempo avanza tan rápido que, en algún momento, uno pierde la noción de él. Pero mírame, mi amor. Mira mis ojos y descubre una verdad eterna: yo te amo.
+
+No te amo como quien ama la calma del mar solo por su paz, sino como quien ama el mar por todo lo que le hace sentir. Tú eres eso para mí, amor. Eres todo lo que despierta mi corazón.
+
+Y aunque pase el tiempo, esta verdad seguirá viviendo en mí. Si alguna vez dudas de ello, solo te pido que mires de cerca mi corazón y escuches mi alma. Ahí vas a encontrar todo lo que siento por ti.
+
+Amor mío, espérame. Hoy voy a verte, y mi corazón late de emoción solo de imaginarte.
+`,
+        },
+        {
+          number: 17,
+          date: "1 de julio de 2026",
+          preview: "My greatest wish",
+          text: `Mi amor hermoso,
+
+Hoy no vengo a escribirte sobre un día especial, ni sobre una fecha importante. Hoy solo quiero dejar una promesa escrita, porque hay cosas que mi corazón necesita decir para que nunca se las lleve el viento.
+
+Mi mayor deseo no es regalarte el objeto más caro del mundo, ni sorprenderte siempre con cosas grandes. Claro que me gustaría hacerlo algún día, porque verte sonreír es una de mis mayores alegrías. Pero si algún día mis manos no pueden darte grandes regalos, quiero que mi corazón nunca deje de darte aquello que realmente importa.
+
+Quiero que siempre te sientas amada.
+
+No solo cuando estemos abrazados. También cuando la distancia aparezca. No solo cuando pueda escribirte una carta como esta. También en los días donde el trabajo, el cansancio o la vida no me permitan encontrar las palabras. Quiero que incluso en mi silencio puedas recordar cuánto te amo.
+
+Porque mi amor por ti no depende de una carta, de una flor o de un regalo. Todo eso son formas bonitas de demostrarlo, pero el amor verdadero vive mucho más profundo que eso. Vive en las decisiones de todos los días. En elegirte. En cuidarte. En respetarte. En querer verte sonreír incluso cuando yo no sea el motivo de esa sonrisa.
+
+Amor, quizá nunca sea el hombre con más dinero del mundo. Tal vez no pueda llenarte de cosas costosas. Pero quiero que siempre puedas decir que encontraste a alguien que te entregó todo lo que tenía.
+
+Y cuando digo todo, hablo de verdad.
+
+Te doy mis fuerzas para levantarte cuando estés cansada. Te doy mis brazos para abrazarte cuando el mundo sea pesado. Te doy mi tiempo, mis sueños, mis esfuerzos y cada parte de mi corazón.
+
+Y también te doy todo lo que todavía no soy.
+
+Porque cada paso que doy para convertirme en un mejor hombre también lo hago pensando en nosotros. Quiero crecer, aprender y madurar para poder cuidar mejor del regalo tan hermoso que Dios puso en mi vida.
+
+Mi mayor riqueza nunca será lo que tenga en una cuenta bancaria. Mi mayor riqueza será poder mirarte a los ojos y saber que te hice sentir profundamente amada.
+
+Si algún día dudas de cuánto significas para mí, vuelve a estas palabras.
+
+Mientras mi corazón siga latiendo, siempre encontrará una forma de recordarte que eres el amor de mi vida.
+
+Y aunque el tiempo cambie muchas cosas, hay una que jamás cambiará.
+
+Mi decisión de amarte.
+`,
+        },
+        {
+          number: 18,
+          date: "3 de julio de 2026",
+          preview: "My one and only love",
+          text: `
+          Mi amor hermoso,
+
+Pero bueno, ¿quién más? Soy yo, tu nub ajonjolí.
+
+Hoy cumplimos 2 meses de enamorados, amor. Y aunque quizá para el mundo pueda parecer solo una fecha más, para mí significa muchísimo. Significa que han pasado dos meses desde que empezamos este camino juntos, dos meses desde que mi corazón pudo decir con alegría que te tenía a mi lado, dos meses desde que esta historia empezó a escribirse con más amor, más ternura y más verdad.
+
+Esta semana he estado algo nervioso, amor. No sé si se me nota mucho o si intento disimularlo demasiado, pero dentro de mí han pasado muchas cosas. Todo lo nuevo siempre trae un poquito de miedo, de dudas, de pensamientos dando vueltas y de preguntas que a veces no tienen respuesta inmediata.
+
+A veces siento que estoy caminando por un lugar que todavía no conozco bien. Como si cada paso tuviera algo de emoción, pero también un poco de incertidumbre. Y aun así, en medio de todo eso, hay algo que me hace sentir profundamente tranquilo: saber que estás conmigo.
+
+Saber que, de alguna forma, estás presente en cada paso que doy me da una fuerza muy bonita. No porque desaparezcan los nervios, sino porque contigo todo se siente más llevadero. Es como si tu existencia le recordara a mi corazón que no todo tiene que ser perfecto para estar bien, que no todo tiene que estar resuelto para seguir avanzando, y que incluso en los días difíciles también puede haber luz.
+
+Y esa luz, muchas veces, eres tú.
+
+No sabes cuánto bien me hace escucharte, aunque sea un ratito. No sabes cuánto puede cambiar mi día una sonrisa tuya, una palabra tuya, una pequeña señal de que estás ahí. Hay días en los que mi mente se siente cansada, en los que todo parece un poco oscuro o pesado, pero entonces apareces tú, con esa forma tan tuya de iluminarlo todo, y mi día cambia.
+
+Una sonrisa tuya es capaz de convertir mi oscuridad en luz.
+
+Por eso siempre voy a buscar una forma de verte o escucharte todos los días. Aunque sea un momento pequeño, aunque el día esté lleno, aunque el mundo se mueva rápido y las responsabilidades quieran ocuparlo todo. Porque estar cerca de ti, de la forma que sea, se ha vuelto una de las formas más bonitas que tiene mi corazón de descansar.
+
+Y hoy, justo hoy que cumplimos dos meses, me doy cuenta de algo muy bonito: no quiero que esta fecha sea solo un recuerdo. Quiero que sea una promesa. Una promesa de seguir eligiéndote, de seguir buscándote, de seguir cuidando este amor que Dios puso en nuestras manos.
+
+A veces pienso que Dios pone personas en nuestra vida no solo para acompañarnos en los días felices, sino también para recordarnos quiénes somos cuando estamos nerviosos, cansados o confundidos. Y tú has sido eso para mí, amor. Una compañía bonita. Una calma. Una razón. Una luz que no exige, pero que simplemente estando ahí me ayuda a seguir.
+
+No quiero que pienses que necesito tener todo perfecto para amarte bien. Estoy aprendiendo, creciendo y enfrentando cosas nuevas. Pero hay algo que sí tengo claro: en cada versión de mí, en cada etapa, en cada intento, mi corazón te va a buscar.
+
+Te va a buscar en una llamada.
+Te va a buscar en un mensaje.
+Te va a buscar en una mirada.
+Te va a buscar en una sonrisa.
+Te va a buscar en cada espacio pequeño donde pueda recordarte que eres importante para mí.
+
+Porque contigo no quiero solo vivir los días fáciles. También quiero aprender a caminar los días nuevos, los días raros, los días inciertos y los días donde uno no sabe muy bien qué siente, pero sabe perfectamente a quién quiere tener cerca.
+
+Y yo te quiero cerca, mi amor.
+
+Gracias por estos dos meses, por ser parte de mis días y por hacerme sentir que, aunque todo sea nuevo, no camino solo. Gracias por esa sonrisa que tiene el poder de arreglarme el alma sin que tú te des cuenta. Gracias por existir de esa forma tan bonita, tan tuya, tan especial.
+
+Hoy solo quería decirte eso: he estado nervioso, sí. Pero también me he sentido grandemente feliz de saber que estás conmigo.
+
+Y mientras pueda, voy a encontrar una forma de verte, escucharte y recordarte todos los días que te amo.
+
+Porque mi día puede empezar oscuro, pero si apareces tú, amor mío, siempre encuentra luz.
+
+Felices 2 meses, mi amor hermoso.
+
+Te amo mucho, hoy, mañana y en cada paso que venga.
+
+Con todo mi corazón,
+tu ajonjolí.
+`,
+        }
+
+
+      ];
+
+      const lettersGrid = document.getElementById("lettersGrid");
+      const modal = document.getElementById("letterModal");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalDate = document.getElementById("modalDate");
+      const modalText = document.getElementById("modalText");
+
+      letters.forEach((letter) => {
+        const card = document.createElement("button");
+        card.className = "letter-card";
+        card.onclick = () => openLetter(letter.number);
+        card.innerHTML = `
+          <span class="letter-number">Carta #${letter.number}</span>
+          <h3>Para mi amor</h3>
+          <p>${letter.preview}</p>
+        `;
+        lettersGrid.appendChild(card);
+      });
+
+      function openLetter(number) {
+        const letter = letters.find((item) => item.number === number);
+        modalTitle.textContent = `Para mi amor #${letter.number}`;
+        modalDate.textContent = letter.date;
+        modalText.textContent = letter.text;
+        modal.classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLetter() {
+        modal.classList.remove("show");
+        document.body.style.overflow = "";
+      }
+
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          closeLetter();
+        }
+      });
+
+
+      const anniversaryOverlay = document.getElementById("anniversaryOverlay");
+      const movieSlidesContainer = document.getElementById("movieSlides");
+      const movieIntro = document.getElementById("movieIntro");
+      const movieIntroDate = document.getElementById("movieIntroDate");
+      const movieIntroTitle = document.getElementById("movieIntroTitle");
+      const movieIntroText = document.getElementById("movieIntroText");
+      const movieFinal = document.getElementById("movieFinal");
+      const movieFinalMini = document.getElementById("movieFinalMini");
+      const movieFinalTitle = document.getElementById("movieFinalTitle");
+      const movieFinalText = document.getElementById("movieFinalText");
+      const movieCaption = document.getElementById("movieCaption");
+      const movieProgress = document.getElementById("movieProgress");
+      const cinemaMusic = document.getElementById("cinemaMusic");
+      const musicStatus = document.getElementById("musicStatus");
+      const musicStartBtn = document.getElementById("musicStartBtn");
+      const anniversaryVideoWrap = document.getElementById("anniversaryVideoWrap");
+      const anniversaryVideo = document.getElementById("anniversaryVideo");
+      const videoPlayFallback = document.getElementById("videoPlayFallback");
+      const videoStatus = document.getElementById("videoStatus");
+
+      const surprises = {
+        first: {
+          date: "03 de junio de 2026",
+          introTitle: "Nuestra pequeña película",
+          introText: "Esto es todos los recuerdos que tengo contigo hasta este momento, mi amor.",
+          finalMini: "Elias + Ariana ❤",
+          finalTitle: "Feliz primer mes",
+          finalText:
+            "Gracias por cada sonrisa, cada mirada y cada momento bonito. Este es solo el primer capítulo de todo lo que quiero vivir contigo. Te amo mucho, mi amor.",
+          music: "music/cancion.mp3",
+          musicStartAt: 94,
+          video: "video/aniversario.mp4",
+          photos: [
+            {
+              src: `img/foto (1).jpeg`,
+              alt: `Primera sorpresa 1`,
+            },
+            {
+              src: `img/foto (3).jpeg`,
+              alt: `Primera sorpresa 2`,
+            },
+            {
+              src: `img/foto (4).jpeg`,
+              alt: `Primera sorpresa 3`,
+            },
+            {
+              src: `img/foto (5).jpeg`,
+              alt: `Primera sorpresa 4`,
+            },
+            {
+              src: `img/foto (6).jpeg`,
+              alt: `Primera sorpresa 5`,
+            },
+            {
+              src: `img/foto (7).jpeg`,
+              alt: `Primera sorpresa 6`,
+            },
+            {
+              src: `img/foto (8).jpeg`,
+              alt: `Primera sorpresa 7`,
+            },
+            {
+              src: `img/foto (9).jpeg`,
+              alt: `Primera sorpresa 8`,
+            },
+            {
+              src: `img/foto (10).jpeg`,
+              alt: `Primera sorpresa 9`,
+            },
+            {
+              src: `img/foto (11).jpeg`,
+              alt: `Primera sorpresa 10`,
+            },
+            {
+              src: `img/foto (12).jpeg`,
+              alt: `Primera sorpresa 11`,
+            },
+            {
+              src: `img/foto (14).jpeg`,
+              alt: `Primera sorpresa 12`,
+            },
+            {
+              src: `img/foto (15).jpeg`,
+              alt: `Primera sorpresa 13`,
+            },
+            {
+              src: `img/foto (16).jpeg`,
+              alt: `Primera sorpresa 14`,
+            },
+            {
+              src: `img/foto (17).jpeg`,
+              alt: `Primera sorpresa 15`,
+            },
+            {
+              src: `img/foto (18).jpeg`,
+              alt: `Primera sorpresa 16`,
+            },
+            {
+              src: `img/foto (19).jpeg`,
+              alt: `Primera sorpresa 17`,
+            },
+            {
+              src: `img/foto (20).jpeg`,
+              alt: `Primera sorpresa 18`,
+            },
+            {
+              src: `img/foto (21).jpeg`,
+              alt: `Primera sorpresa 19`,
+            },
+            {
+              src: `img/foto (22).jpeg`,
+              alt: `Primera sorpresa 20`,
+            },
+            {
+              src: `img/foto (23).jpeg`,
+              alt: `Primera sorpresa 21`,
+            },
+            {
+              src: `img/foto (24).jpeg`,
+              alt: `Primera sorpresa 22`,
+            },
+            {
+              src: `img/foto (25).jpeg`,
+              alt: `Primera sorpresa 23`,
+            },
+            {
+              src: `img/foto (26).jpeg`,
+              alt: `Primera sorpresa 24`,
+            },
+            {
+              src: `img/foto (27).jpeg`,
+              alt: `Primera sorpresa 25`,
+            },
+            {
+              src: `img/foto (28).jpeg`,
+              alt: `Primera sorpresa 26`,
+            },
+            {
+              src: `img/foto (29).jpeg`,
+              alt: `Primera sorpresa 27`,
+            },
+            {
+              src: `img/foto (30).jpeg`,
+              alt: `Primera sorpresa 28`,
+            },
+          ],
+          phrases: [
+            "Todo empezó con una sonrisa que se volvió mi lugar favorito.",
+            "Contigo, los días simples se sienten como escenas que quiero repetir.",
+            "Tus ojitos tienen esa luz que calma mi mundo entero.",
+            "Cada foto nuestra guarda algo que mi corazón no quiere olvidar.",
+            "Un mes puede sonar poquito, pero contigo se siente gigante.",
+            "Gracias por hacerme sentir que el amor también puede ser hogar.",
+            "Quiero seguir coleccionando momentos, risas y planes contigo.",
+            "Ariana, tú eres mi capítulo más bonito de este comienzo.",
+            "Donde estés tú, mi corazón encuentra una razón para sonreír.",
+            "Cada recuerdo contigo se siente como una escena favorita.",
+            "Si pudiera repetir una escena, elegiría cualquier momento contigo.",
+            "Este primer mes es solo el tráiler de todo lo hermoso que viene.",
+            "Te amo, mi amor. Feliz primer mes.",
+          ],
+        },
+        second: {
+          date: "03 de julio de 2026",
+          introTitle: "Nuestra segunda película",
+          introText: "Hoy cumplimos dos meses, mi amor. Esta nueva sorpresa guarda otro pedacito de nuestra historia.",
+          finalMini: "Elias + Ariana ❤",
+          finalTitle: "Felices dos meses",
+          finalText:
+            "Dos meses contigo y cada día confirmo que eres una de las partes más bonitas de mi vida. Gracias por seguir aquí, por tu amor y por cada momento que construimos juntos. Te amo mucho, mi amor.",
+          music: "music/cancion-2.mp3",
+          musicStartAt: 0,
+          video: "video/aniversario-2.mp4",
+          photos: [
+            {
+              src: `img/foto (31).jpeg`,
+              alt: `Segunda sorpresa 1`,
+            },
+            {
+              src: `img/foto (32).jpeg`,
+              alt: `Segunda sorpresa 2`,
+            },
+            {
+              src: `img/foto (33).jpeg`,
+              alt: `Segunda sorpresa 3`,
+            },
+            {
+              src: `img/foto (34).jpeg`,
+              alt: `Segunda sorpresa 4`,
+            },
+            {
+              src: `img/foto (35).jpeg`,
+              alt: `Segunda sorpresa 5`,
+            },
+            {
+              src: `img/foto (36).jpeg`,
+              alt: `Segunda sorpresa 6`,
+            },
+            {
+              src: `img/foto (37).jpeg`,
+              alt: `Segunda sorpresa 7`,
+            },
+            {
+              src: `img/foto (38).jpeg`,
+              alt: `Segunda sorpresa 8`,
+            },
+            {
+              src: `img/foto (39).jpeg`,
+              alt: `Segunda sorpresa 9`,
+            },
+            {
+              src: `img/foto (40).jpeg`,
+              alt: `Segunda sorpresa 10`,
+            },
+          ],
+          phrases: [
+            "Dos meses contigo y todavía siento emoción por cada nuevo recuerdo.",
+            "Me encanta saber que seguimos escribiendo esta historia juntos.",
+            "Cada foto nueva es otra razón para agradecer por tenerte en mi vida.",
+            "Tu sonrisa sigue siendo mi escena favorita.",
+            "Este segundo mes me recuerda que amar también es cuidar cada detalle.",
+            "Gracias por quedarte, por ser tú y por hacer mis días más bonitos.",
+            "Quiero seguir sumando meses, planes, risas y sueños contigo.",
+            "Ariana, eres mi casualidad más bonita y mi elección más sincera.",
+            "Hoy celebro dos meses, pero mi corazón ya piensa en toda una vida.",
+            "Te amo, mi amor. Felices dos meses.",
+          ],
+        },
+      };
+
+      let activeSurprise = surprises.first;
+
+      let movieTimer = null;
+      let typingTimer = null;
+      let movieSlides = [];
+      const scenePauseTime = 850;
+      const afterTypingPauseTime = 1700;
+
+      function getDefaultMoviePhotos() {
+        const carouselPhotos = Array.from(
+          document.querySelectorAll(".carousel .slide img"),
+        ).map((img, index) => ({
+          src: img.getAttribute("src"),
+          alt: img.getAttribute("alt") || `Foto romántica ${index + 1}`,
+        }));
+
+        const mergedPhotos = [...carouselPhotos, ...galleryPhotos];
+        const seen = new Set();
+
+        return mergedPhotos.filter((photo) => {
+          if (!photo.src || seen.has(photo.src)) {
+            return false;
+          }
+          seen.add(photo.src);
+          return true;
+        });
+      }
+
+      function getAllMoviePhotos() {
+        return activeSurprise.photos || getDefaultMoviePhotos();
+      }
+
+      function applySurpriseContent() {
+        if (movieIntroDate) movieIntroDate.textContent = activeSurprise.date;
+        if (movieIntroTitle) movieIntroTitle.textContent = activeSurprise.introTitle;
+        if (movieIntroText) movieIntroText.textContent = activeSurprise.introText;
+        if (movieFinalMini) movieFinalMini.textContent = activeSurprise.finalMini;
+        if (movieFinalTitle) movieFinalTitle.textContent = activeSurprise.finalTitle;
+        if (movieFinalText) movieFinalText.textContent = activeSurprise.finalText;
+
+        if (cinemaMusic) {
+          cinemaMusic.pause();
+          cinemaMusic.src = activeSurprise.music;
+          cinemaMusic.load();
+        }
+
+        if (anniversaryVideo) {
+          anniversaryVideo.pause();
+          anniversaryVideo.src = activeSurprise.video;
+          anniversaryVideo.load();
+        }
+      }
+
+      function buildMovieSlides() {
+        movieSlidesContainer.innerHTML = "";
+        const moviePhotos = getAllMoviePhotos();
+
+        moviePhotos.forEach((photo) => {
+          const scene = document.createElement("div");
+          scene.className = "movie-slide";
+          scene.innerHTML = `<img src="${photo.src}" alt="${photo.alt}" />`;
+          movieSlidesContainer.appendChild(scene);
+        });
+
+        movieSlides = document.querySelectorAll(".movie-slide");
+      }
+
+      function launchAnniversary(surpriseKey = "first") {
+        activeSurprise = surprises[surpriseKey] || surprises.first;
+        applySurpriseContent();
+        anniversaryOverlay.classList.add("show");
+        document.body.style.overflow = "hidden";
+        createAnniversaryMagic();
+        buildMovieSlides();
+        startCinemaMusic();
+        startMovieProjection();
+      }
+
+      function startMovieProjection() {
+        clearTimeout(movieTimer);
+        clearTimeout(typingTimer);
+        movieIntro.classList.remove("hide");
+        movieFinal.classList.add("hide");
+        const movieSkipButtonStart = document.querySelector(".movie-skip");
+        if (movieSkipButtonStart) {
+          movieSkipButtonStart.style.display = "";
+        }
+        movieCaption.textContent = "";
+        movieCaption.classList.remove("typing");
+        movieCaption.style.opacity = "0";
+        movieProgress.style.width = "0%";
+        movieSlides.forEach((slide) => slide.classList.remove("active"));
+
+        movieTimer = setTimeout(() => {
+          movieIntro.classList.add("hide");
+          showMovieScene(0);
+        }, 1500);
+      }
+
+      function typeMovieCaption(text, onComplete) {
+        clearTimeout(typingTimer);
+        let letterIndex = 0;
+        movieCaption.textContent = "";
+        movieCaption.classList.add("typing");
+        movieCaption.style.animation = "none";
+        void movieCaption.offsetWidth;
+        movieCaption.style.animation = "captionIn 0.9s ease forwards";
+
+        function writeLetter() {
+          movieCaption.textContent = text.slice(0, letterIndex);
+          letterIndex++;
+
+          if (letterIndex <= text.length) {
+            typingTimer = setTimeout(writeLetter, 45);
+          } else {
+            movieCaption.classList.remove("typing");
+            if (typeof onComplete === "function") {
+              onComplete();
+            }
+          }
+        }
+
+        writeLetter();
+      }
+
+      function showMovieScene(index) {
+        clearTimeout(movieTimer);
+        clearTimeout(typingTimer);
+
+        if (index >= movieSlides.length) {
+          showMovieFinal();
+          return;
+        }
+
+        movieSlides.forEach((slide) => slide.classList.remove("active"));
+        movieCaption.textContent = "";
+        movieCaption.classList.remove("typing");
+        movieCaption.style.opacity = "0";
+
+        movieTimer = setTimeout(() => {
+          movieSlides[index].classList.add("active");
+          movieProgress.style.width = `${((index + 1) / (movieSlides.length + 1)) * 100}%`;
+
+          const phrase = activeSurprise.phrases[index % activeSurprise.phrases.length];
+          typeMovieCaption(phrase, () => {
+            movieTimer = setTimeout(() => {
+              showMovieScene(index + 1);
+            }, afterTypingPauseTime);
+          });
+        }, scenePauseTime);
+      }
+
+      function setCinemaMusicVolume(targetVolume, duration = 900) {
+        if (!cinemaMusic) {
+          return;
+        }
+
+        const startVolume = cinemaMusic.volume;
+        const difference = targetVolume - startVolume;
+        const startTime = performance.now();
+
+        function animateVolume(currentTime) {
+          const progress = Math.min((currentTime - startTime) / duration, 1);
+          cinemaMusic.volume = Math.max(0, Math.min(1, startVolume + difference * progress));
+
+          if (progress < 1) {
+            requestAnimationFrame(animateVolume);
+          }
+        }
+
+        requestAnimationFrame(animateVolume);
+      }
+
+      function startCinemaMusic() {
+        if (!cinemaMusic) {
+          return;
+        }
+
+        cinemaMusic.volume = 0.20;
+        cinemaMusic.muted = false;
+
+        try {
+          cinemaMusic.currentTime = activeSurprise.musicStartAt || 0;
+        } catch (error) {
+          cinemaMusic.addEventListener("loadedmetadata", () => {
+            cinemaMusic.currentTime = activeSurprise.musicStartAt || 0;
+          }, { once: true });
+        }
+
+        const playPromise = cinemaMusic.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              if (musicStartBtn) musicStartBtn.classList.remove("show");
+              if (musicStatus) {
+                musicStatus.textContent = "♫ Música de fondo activada";
+                musicStatus.classList.add("show");
+                setTimeout(() => musicStatus.classList.remove("show"), 2200);
+              }
+            })
+            .catch(() => {
+              if (musicStartBtn) musicStartBtn.classList.add("show");
+              if (musicStatus) {
+                musicStatus.textContent = "Presiona “Activar música” para escuchar la canción.";
+                musicStatus.classList.add("show");
+              }
+            });
+        }
+      }
+
+      function lowerCinemaMusicForVideo() {
+        if (!cinemaMusic) {
+          return;
+        }
+
+        if (!cinemaMusic.paused) {
+          setCinemaMusicVolume(0.06, 1200);
+        }
+      }
+
+      function stopCinemaMusic() {
+        if (!cinemaMusic) {
+          return;
+        }
+
+        cinemaMusic.pause();
+        cinemaMusic.currentTime = 0;
+        cinemaMusic.volume = 0.78;
+      }
+
+      function fadeOutCinemaMusic() {
+        if (!cinemaMusic || cinemaMusic.paused) {
+          return;
+        }
+
+        setCinemaMusicVolume(0, 600);
+        setTimeout(() => {
+          cinemaMusic.pause();
+          cinemaMusic.currentTime = 0;
+          cinemaMusic.volume = 0.78;
+        }, 650);
+      }
+
+      function startFinalVideo() {
+        if (!anniversaryVideo) {
+          return;
+        }
+
+        if (videoStatus) {
+          videoStatus.innerHTML = "";
+        }
+
+        fadeOutCinemaMusic();
+        anniversaryVideo.muted = false;
+        anniversaryVideo.controls = true;
+
+        const playPromise = anniversaryVideo.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              if (videoPlayFallback) {
+                videoPlayFallback.classList.remove("show");
+              }
+
+              if (videoStatus) {
+                videoStatus.textContent = "";
+              }
+            })
+            .catch(() => {
+              if (videoPlayFallback) {
+                videoPlayFallback.classList.add("show");
+              }
+
+              if (videoStatus) {
+                videoStatus.innerHTML =
+                  `No se pudo reproducir. Revisa que exista <b>${activeSurprise.video}</b>.`;
+              }
+            });
+        }
+      }
+
+      function loadLocalAnniversaryVideo(event) {
+        const file = event.target.files && event.target.files[0];
+
+        if (!file || !anniversaryVideo) {
+          return;
+        }
+
+        const videoUrl = URL.createObjectURL(file);
+        anniversaryVideo.src = videoUrl;
+        anniversaryVideo.load();
+
+        if (videoStatus) {
+          videoStatus.textContent = "Video cargado. Presiona reproducir.";
+        }
+
+        if (videoPlayFallback) {
+          videoPlayFallback.classList.add("show");
+        }
+      }
+
+      function prepareFinalVideo() {
+        if (!anniversaryVideo) {
+          return;
+        }
+
+        anniversaryVideo.pause();
+        anniversaryVideo.currentTime = 0;
+        anniversaryVideo.muted = false;
+        anniversaryVideo.controls = true;
+
+        if (anniversaryVideoWrap) {
+          anniversaryVideoWrap.classList.add("show");
+        }
+
+        if (videoPlayFallback) {
+          videoPlayFallback.classList.add("show");
+        }
+
+        if (videoStatus) {
+          videoStatus.textContent = "";
+        }
+      }
+
+      function showMovieFinal() {
+        clearTimeout(movieTimer);
+        clearTimeout(typingTimer);
+        movieIntro.classList.add("hide");
+        movieSlides.forEach((slide) => slide.classList.remove("active"));
+        movieCaption.textContent = "";
+        movieCaption.classList.remove("typing");
+        movieCaption.style.opacity = "0";
+        movieFinal.classList.remove("hide");
+        const movieSkipButtonFinal = document.querySelector(".movie-skip");
+        if (movieSkipButtonFinal) {
+          movieSkipButtonFinal.style.display = "none";
+        }
+        prepareFinalVideo();
+        lowerCinemaMusicForVideo();
+        movieProgress.style.width = "100%";
+        createAnniversaryMagic();
+      }
+
+      function closeAnniversary() {
+        clearTimeout(movieTimer);
+        clearTimeout(typingTimer);
+        anniversaryOverlay.classList.remove("show");
+        document.body.style.overflow = "";
+        stopCinemaMusic();
+        movieCaption.textContent = "";
+        movieCaption.classList.remove("typing");
+        movieProgress.style.width = "0%";
+        movieFinal.classList.add("hide");
+        const movieSkipButtonClose = document.querySelector(".movie-skip");
+        if (movieSkipButtonClose) {
+          movieSkipButtonClose.style.display = "";
+        }
+
+        if (anniversaryVideo) {
+          anniversaryVideo.pause();
+          anniversaryVideo.currentTime = 0;
+        }
+
+        if (anniversaryVideoWrap) {
+          anniversaryVideoWrap.classList.remove("show");
+        }
+
+        movieIntro.classList.remove("hide");
+        if (movieSlides.length) {
+          movieSlides.forEach((slide) => slide.classList.remove("active"));
+        }
+      }
+
+
+      if (anniversaryVideo) {
+        anniversaryVideo.addEventListener("play", () => {
+          fadeOutCinemaMusic();
+        });
+
+        anniversaryVideo.addEventListener("ended", () => {
+          stopCinemaMusic();
+        });
+      }
+
+      anniversaryOverlay.addEventListener("click", (event) => {
+        if (event.target === anniversaryOverlay) {
+          closeAnniversary();
+        }
+      });
+
+      function createAnniversaryMagic() {
+        const heartColors = ["#ff6b8a", "#ffd2a8", "#ff9a62", "#ffbfd0", "#ffffff"];
+        const confettiColors = ["#ff6b8a", "#ffd2a8", "#ff9a62", "#ffe15d", "#ffffff", "#d76d77"];
+
+        for (let i = 0; i < 42; i++) {
+          const heart = document.createElement("span");
+          heart.className = "floating-heart";
+          heart.textContent = i % 5 === 0 ? "✨" : "❤";
+          heart.style.setProperty("--left", Math.random() * 100 + "vw");
+          heart.style.setProperty("--size", 18 + Math.random() * 30 + "px");
+          heart.style.setProperty("--duration", 3.4 + Math.random() * 2.6 + "s");
+          heart.style.setProperty("--rotate", (Math.random() * 120 - 60) + "deg");
+          heart.style.setProperty("--color", heartColors[Math.floor(Math.random() * heartColors.length)]);
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 6500);
+        }
+
+        for (let i = 0; i < 90; i++) {
+          const confetti = document.createElement("span");
+          confetti.className = "confetti-piece";
+          confetti.style.setProperty("--left", Math.random() * 100 + "vw");
+          confetti.style.setProperty("--w", 6 + Math.random() * 8 + "px");
+          confetti.style.setProperty("--h", 10 + Math.random() * 14 + "px");
+          confetti.style.setProperty("--duration", 2.6 + Math.random() * 2.2 + "s");
+          confetti.style.setProperty("--rotate", (Math.random() * 720 - 360) + "deg");
+          confetti.style.setProperty("--color", confettiColors[Math.floor(Math.random() * confettiColors.length)]);
+          document.body.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 5200);
+        }
+      }
+
+    

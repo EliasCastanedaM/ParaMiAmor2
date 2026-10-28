@@ -1,0 +1,591 @@
+/*
+  ARIANA — EDICIÓN DE AUTOR / V5
+  Dirección: álbum de dos personas. Fotografía y texto primero.
+  La base original se conserva en legacy.css para mantener las interfaces JS.
+  Esta hoja define la nueva composición y la identidad.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  --aubergine:#23191f;
+  --aubergine-dark:#161116;
+  --plum:#51313f;
+  --paper:#f4eee5;
+  --paper-muted:#e5d9cc;
+  --rose:#b98781;
+  --copper:#bd9580;
+  --pale:#f8f2eb;
+  --line-light:rgba(250,239,228,.21);
+  --line-dark:rgba(69,47,43,.2);
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"DM Sans",Arial,sans-serif;
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:var(--aubergine-dark);
+  color:var(--paper);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  letter-spacing:-.015em;
+}
+body::before,body::after{display:none;content:none}
+button{font-family:var(--sans)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--copper);outline-offset:4px}
+a,button{-webkit-tap-highlight-color:transparent}
+.page{width:100%;padding:0;max-width:none;margin:0}
+
+/* 0 / NAVEGACIÓN — discreta, como los créditos de una película */
+.site-header{
+  display:flex;align-items:center;justify-content:space-between;
+  min-height:83px;padding:0 clamp(25px,5vw,92px);
+  background:#23191f;
+  border-bottom:1px solid var(--line-light);
+  position:relative;z-index:20;
+}
+.site-brand{
+  display:inline-flex;gap:8px;align-items:baseline;
+  font:500 27px/1 var(--serif);letter-spacing:-.03em;
+  color:var(--pale);text-decoration:none;
+}
+.site-brand span{font:400 italic 23px/1 var(--serif);color:#c5a094}
+.site-nav{display:flex;align-items:center;gap:clamp(19px,3vw,55px)}
+.site-nav a{
+  font:600 10px/1 var(--sans);
+  color:rgba(244,235,228,.78);
+  text-transform:uppercase;letter-spacing:.16em;
+  text-decoration:none;transition:color .2s;
+}
+.site-nav a:hover{color:#fff}
+.site-meta{font:500 10px/1.4 var(--sans);letter-spacing:.16em;color:#bdaaa5;text-transform:uppercase}
+.site-progress{
+  position:fixed;top:0;left:0;width:100%;height:2px;
+  z-index:90;transform:scaleX(0);transform-origin:left;
+  background:#d2a68f;pointer-events:none;
+}
+
+/* 1 / APERTURA — composición doble de fotografía y carta */
+.hero-stage{
+  display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+  width:100%;min-height:min(820px,calc(100svh - 83px));
+  background:#291b23;isolation:isolate;
+}
+.hero{
+  position:relative;z-index:3;
+  min-width:0;min-height:660px;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:clamp(55px,7vw,120px) clamp(35px,5vw,94px);
+  border:0;border-radius:0;box-shadow:none;backdrop-filter:none;
+  text-align:left;overflow:visible;
+  background:
+   linear-gradient(160deg,rgba(84,48,59,.28),transparent 47%),
+   #291b23;
+}
+.hero::before{
+  content:"";position:absolute;left:clamp(35px,5vw,94px);top:clamp(35px,4vw,70px);
+  width:65px;height:1px;background:#cca696;transform:none;
+}
+.hero::after{display:none;content:none}
+.hero .eyebrow{
+  display:block;margin:0 0 35px;
+  background:transparent;border:0;border-radius:0;padding:0;
+  font:600 10px/1.5 var(--sans);letter-spacing:.19em;
+  color:#d9b6a8;text-transform:uppercase;
+}
+.hero h1{
+  margin:0 0 40px;max-width:750px;
+  font:400 clamp(74px,6.7vw,128px)/.8 var(--serif);
+  letter-spacing:-.07em;color:#fff7ee;text-shadow:none;
+}
+.hero h1 .line{display:block}
+.hero h1 .line:nth-child(2){margin-top:.18em}
+.hero h1 em{font-style:italic;font-weight:400;color:#ddafa4}
+.hero p{
+  max-width:450px;margin:0;
+  color:#e0d0c9;
+  font:400 clamp(14px,1.15vw,16px)/1.9 var(--sans);
+  letter-spacing:-.01em;
+}
+.hero-signature{
+  display:flex;align-items:center;gap:14px;
+  margin-top:44px;color:#e6bbb2;
+  font:italic 400 25px/1 var(--serif);
+}
+.hero-signature::before{content:"";width:42px;height:1px;background:#c39c8b}
+
+/* Foto = parte esencial del relato, sin marco falso ni glow */
+.carousel-section{position:relative;margin:0;min-width:0;min-height:660px}
+.carousel{
+  width:100%;height:100%;min-height:660px;max-width:none;margin:0;
+  border:0;border-radius:0;background:#41302f;box-shadow:none;overflow:hidden;
+}
+.carousel::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(0deg,rgba(19,12,18,.67),transparent 30%),
+             linear-gradient(90deg,rgba(21,14,22,.22),transparent 20%);
+}
+.carousel::after{content:none;display:none}
+.slide{transition:opacity 1.1s ease,transform 5.5s ease;transform:scale(1.045)}
+.slide.active{transform:scale(1)}
+.slide img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:saturate(.88) contrast(1.04)}
+.carousel-overlay{
+  position:absolute;inset:auto 100px 43px 46px;z-index:4;padding:0;
+  color:#f6e9e0;text-align:left;background:none;
+  font:italic 400 clamp(24px,2.4vw,38px)/1.03 var(--serif);
+  letter-spacing:-.02em;
+}
+.carousel-btn{
+  z-index:6;top:auto;bottom:38px;transform:none;
+  border:1px solid rgba(255,250,245,.78);
+  border-radius:50%;width:41px;height:41px;
+  background:transparent;color:#fff;
+  font:400 25px/1 var(--serif);box-shadow:none;
+}
+.carousel-btn:hover{transform:none;background:#f2e2d5;color:#271c22}
+.prev{left:auto;right:97px}
+.next{right:44px}
+.dots{
+  position:absolute;bottom:24px;left:46px;
+  display:flex;gap:8px;justify-content:flex-start;margin:0;z-index:5;
+}
+.dot{background:rgba(250,240,234,.52);width:7px;height:7px;border-radius:50%}
+.dot.active{background:#f6eadf;width:27px;height:7px;border-radius:0}
+.carousel-counter{
+  position:absolute;top:41px;right:42px;z-index:5;
+  color:#fff6ef;font:600 11px/1 var(--sans);
+  letter-spacing:.17em;text-shadow:0 2px 12px rgba(0,0,0,.5);
+}
+.carousel-counter .current{font-size:14px}
+
+/* 2 / UNA FRASE QUE UNE DOS MOMENTOS */
+.interlude{
+  display:grid;grid-template-columns:230px minmax(0,1fr);
+  gap:30px;align-items:start;padding:clamp(90px,10vw,155px) clamp(38px,8.5vw,150px);
+  background:var(--paper);color:#3c2e2f;
+}
+.section-kicker{
+  color:#886b63;font:700 10px/1.5 var(--sans);letter-spacing:.19em;
+  text-transform:uppercase;
+}
+.interlude blockquote{
+  max-width:960px;margin:0;border:0;
+  font:400 clamp(48px,6vw,94px)/.99 var(--serif);
+  letter-spacing:-.048em;
+}
+.interlude blockquote em{color:#9d6f68;font-weight:400}
+.interlude .interlude-end{
+  grid-column:2;display:block;margin:0;color:#86746d;
+  font:400 13px/1.7 var(--sans);
+}
+
+/* 3 / GALERÍA COMO DOBLE PÁGINA FOTOGRÁFICA */
+.gallery-entry-section{margin:0;scroll-margin-top:0;background:var(--paper-muted)}
+.gallery-entry-card{
+  display:grid;grid-template-columns:52% 48%;
+  grid-template-rows:auto auto auto 1fr;
+  width:100%;max-width:none;min-height:700px;margin:0;padding:0;
+  background:var(--paper-muted);border:0;border-radius:0;
+  color:#2e2828;box-shadow:none;overflow:hidden;
+  text-align:left;transform:none;
+}
+.gallery-entry-card:hover{transform:none;box-shadow:none}
+.gallery-entry-card::before,.gallery-entry-card::after{content:none;display:none}
+.gallery-art{
+  grid-column:1;grid-row:1/5;position:relative;overflow:hidden;
+  min-height:700px;background:#78605c;
+}
+.gallery-art img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 45%;filter:saturate(.84);
+  transition:transform 1s ease;
+}
+.gallery-entry-card:hover .gallery-art img{transform:scale(1.035)}
+.gallery-art::after{
+  content:"";position:absolute;inset:0;border:24px solid rgba(244,238,229,.03);
+  pointer-events:none;
+}
+.gallery-entry-card>span{
+  grid-column:2;grid-row:1;align-self:end;
+  width:auto;margin:0;padding:clamp(65px,8vw,135px) clamp(35px,6vw,105px) 0;
+  color:#8c6b63;background:none;border:0;border-radius:0;
+  font:700 10px/1.5 var(--sans);letter-spacing:.19em;text-transform:uppercase;
+}
+.gallery-entry-card h2{
+  grid-column:2;grid-row:2;
+  max-width:none;margin:23px 0 20px;padding:0 clamp(35px,6vw,105px);
+  font:400 clamp(78px,9vw,135px)/.78 var(--serif);
+  letter-spacing:-.065em;color:#302729;text-shadow:none;
+}
+.gallery-entry-card p{
+  grid-column:2;grid-row:3;
+  margin:0;max-width:none;padding:0 clamp(35px,6vw,105px);
+  font:400 14px/1.9 var(--sans);color:#5b504c;
+}
+.gallery-entry-btn{
+  grid-column:2;grid-row:4;justify-self:start;align-self:start;
+  display:inline-flex;margin:41px 0 30px clamp(35px,6vw,105px);
+  padding:0 0 10px;
+  color:#403332;background:none;border:0;border-bottom:1px solid #403332;
+  border-radius:0;box-shadow:none;font:700 12px/1.5 var(--sans);
+}
+.gallery-entry-btn::after{content:"↗";margin-left:15px}
+
+/* 4 / DOS CAPÍTULOS SIN TARJETAS UI */
+.anniversary-section{width:100%;margin:0;padding:clamp(105px,11vw,175px) clamp(38px,8.5vw,150px);
+  background:var(--aubergine-dark);text-align:left}
+.chapter-heading{
+  display:grid;grid-template-columns:230px 1fr;gap:30px;
+  margin-bottom:75px;align-items:start;
+}
+.chapter-heading h2{
+  max-width:950px;margin:-12px 0 0;
+  font:400 clamp(65px,8vw,121px)/.85 var(--serif);
+  letter-spacing:-.055em;color:#f4e9e0;
+}
+.chapter-heading h2 em{font-weight:400;color:#d2a898}
+.anniversary-cards-grid{
+  display:flex;flex-direction:column;width:100%;max-width:1280px;margin:0;
+  gap:0;align-items:stretch;
+}
+.anniversary-card,.anniversary-card.previous,.anniversary-card.current{
+  position:relative;
+  width:100%;min-height:620px;
+  margin:0;padding:55px 0;
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  grid-template-rows:40px auto auto 1fr;
+  gap:0 clamp(38px,6vw,100px);
+  align-items:start;
+  border:0;border-top:1px solid var(--line-light);border-radius:0;
+  background:none;box-shadow:none;
+  text-align:left;transform:none;overflow:visible;
+}
+.anniversary-card:last-child{border-bottom:1px solid var(--line-light)}
+.anniversary-card::before,.anniversary-card::after{display:none;content:none}
+.anniversary-photo{
+  grid-column:1;grid-row:1/5;position:relative;
+  width:100%;height:510px;overflow:hidden;
+  background:#45343a;
+}
+.anniversary-photo img{
+  display:block;width:100%;height:100%;
+  object-fit:cover;filter:saturate(.82) contrast(1.03);
+}
+.anniversary-card:nth-child(even) .anniversary-photo{grid-column:2}
+.anniversary-card:nth-child(even) .anniversary-date,
+.anniversary-card:nth-child(even) h2,
+.anniversary-card:nth-child(even) p,
+.anniversary-card:nth-child(even) .anniversary-btn{grid-column:1}
+.anniversary-date{
+  grid-column:2;grid-row:1;position:relative;
+  align-self:start;justify-self:start;margin:6px 0 0;padding:0;
+  border:0;border-radius:0;background:none;
+  color:#d3ada2;font:600 11px/1.5 var(--sans);letter-spacing:.15em;
+}
+.anniversary-card h2{
+  grid-column:2;grid-row:2;max-width:550px;
+  margin:12px 0 24px;
+  font:400 clamp(68px,7vw,108px)/.85 var(--serif);
+  letter-spacing:-.055em;color:#f8ede4;text-shadow:none;
+}
+.anniversary-card p{
+  grid-column:2;grid-row:3;max-width:505px;
+  margin:0 0 33px;
+  font:400 14px/1.9 var(--sans);color:#ccbdb6;
+}
+.anniversary-btn{
+  grid-column:2;grid-row:4;align-self:start;justify-self:start;
+  display:inline-flex;min-height:auto;margin:0;padding:14px 0;
+  background:none;border:0;border-bottom:1px solid #ba9689;border-radius:0;
+  font:600 12px/1.5 var(--sans);color:#f4d3c0;
+  box-shadow:none;filter:none;animation:none;
+  transition:color .2s ease;
+}
+.anniversary-btn:hover{transform:none;box-shadow:none;filter:none;color:#fff}
+
+/* 5 / CARTAS — diseñadas para leer, no para decorar */
+.letters-section{
+  margin:0;padding:clamp(100px,10vw,155px) clamp(38px,8.5vw,150px);
+  background:var(--paper);color:#30282b;
+}
+.section-header{text-align:left;margin-bottom:60px}
+.section-header::before{content:"03 / LAS PALABRAS";display:block;
+  margin-bottom:24px;color:#9c746b;font:700 10px/1 var(--sans);letter-spacing:.18em}
+.section-header h2{
+  margin:0;color:#32272b;font:400 clamp(80px,10vw,149px)/.82 var(--serif);
+  letter-spacing:-.065em;text-shadow:none;
+}
+.section-header p{margin:26px 0 0;color:#736762;font:400 14px/1.7 var(--sans)}
+.letters-grid{
+  width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  border-top:1px solid #cbbfb4;gap:0;
+}
+.letter-card{
+  position:relative;min-height:224px;padding:33px 35px 30px 0;
+  background:transparent;border:0;border-bottom:1px solid #cbbfb4;
+  border-right:1px solid #cbbfb4;border-radius:0;
+  text-align:left;color:#332b2d;box-shadow:none;overflow:hidden;
+  transition:background .22s ease;
+}
+.letter-card:nth-child(even){padding-left:35px;border-right:0}
+.letter-card:hover{transform:none;box-shadow:none;background:#eee5dc}
+.letter-card::after{
+  content:"↗";right:32px;bottom:22px;
+  color:#9b7a6c;font:400 24px/1 var(--serif);opacity:1;
+}
+.letter-number{
+  margin:0 0 26px;padding:0;background:none;border:0;border-radius:0;
+  color:#9a6d64;font:700 11px/1.2 var(--sans);letter-spacing:.13em;
+}
+.letter-card h3{
+  max-width:85%;margin:0 0 9px;
+  color:#302629;font:500 35px/.95 var(--serif);
+}
+.letter-card p{
+  max-width:87%;margin:0;color:#796e69;
+  font:400 13px/1.7 var(--sans);
+}
+.footer-note{
+  margin:0;padding:33px 25px 43px;
+  background:#23191f;text-align:center;border-top:1px solid var(--line-light);
+  color:#d9c2b5;font:italic 400 27px/1.2 var(--serif);
+}
+
+/* 6 / GALERÍA INTERIOR — archivo fotográfico libre */
+.gallery-page{
+  width:100%;max-width:none;margin:0;
+  padding:50px clamp(30px,7vw,125px) 130px;
+  background:var(--aubergine-dark);color:var(--paper);
+}
+.back-btn{
+  margin:0;padding:10px 0;background:none;border:0;border-bottom:1px solid #c9a18c;
+  border-radius:0;color:#e8cdbd;font:600 12px/1.4 var(--sans);
+}
+.back-btn:hover{background:none;color:white}
+.gallery-header{
+  max-width:1300px;margin:70px 0 65px;
+  padding:0;border:0;border-radius:0;background:none;box-shadow:none;text-align:left;
+}
+.gallery-header h1{
+  margin:0 0 24px;color:#f4eee5;
+  font:400 clamp(95px,12vw,185px)/.76 var(--serif);
+  letter-spacing:-.065em;text-shadow:none;
+}
+.gallery-header p{
+  max-width:680px;color:#cbbcb3;
+  font:400 14px/1.9 var(--sans);
+}
+.photos-grid{
+  display:block;columns:3 290px;column-gap:22px;
+  width:100%;max-width:1530px;margin:0;
+}
+.photo-card{
+  display:inline-block;width:100%;height:auto;min-height:0;
+  margin:0 0 22px;padding:0;break-inside:avoid;vertical-align:top;
+  background:#2b2228;border:0;border-radius:0;box-shadow:none;overflow:hidden;
+}
+.photo-card img{display:block;width:100%;height:auto;object-fit:contain;transition:transform .5s ease}
+.photo-card:hover{transform:none;box-shadow:none}
+.photo-card:hover img{transform:scale(1.025)}
+.photo-card::after{
+  content:"Ver fotografía ↗";left:14px;right:auto;bottom:14px;
+  padding:7px 11px;background:rgba(20,17,20,.85);color:#f6eee7;
+  border:0;border-radius:0;font:500 11px/1.4 var(--sans);
+}
+
+/* 7 / RECUERDOS ABIERTOS — cuarto de lectura y proyección */
+.modal{background:rgba(15,11,16,.88);backdrop-filter:blur(6px)}
+.letter-page{
+  width:min(790px,100%);max-height:91dvh;overflow:auto;
+  padding:clamp(40px,6vw,80px);background:#f5eee5;
+  border:0;border-radius:0;
+  box-shadow:0 33px 100px rgba(0,0,0,.37);
+}
+.letter-page h2{
+  margin:0;color:#4a3035;font:400 clamp(70px,9vw,115px)/.82 var(--serif);
+  letter-spacing:-.035em;text-shadow:none;
+}
+.letter-page .date{margin:26px 0 33px;color:#9b7368;font:500 12px/1.4 var(--sans)}
+.letter-text{
+  color:#4a3c3c;font:400 clamp(15px,1.6vw,17px)/2 var(--sans);
+  white-space:pre-line;
+}
+.signature{color:#86594f;font:italic 400 47px/1 var(--serif);text-align:right}
+.close-btn,.photo-close-btn{
+  background:#e5d6c8;color:#392a2d;border:0;border-radius:0;box-shadow:none
+}
+.photo-modal{background:rgba(12,9,13,.94);backdrop-filter:blur(6px)}
+.photo-modal-content img{border:0;border-radius:0;box-shadow:0 22px 75px rgba(0,0,0,.4)}
+
+/* 8 / EL CINE — preservar música y videos; darles el espacio principal */
+.anniversary-overlay{
+  background:#0c0a10;backdrop-filter:none;padding:20px
+}
+.movie-stage{
+  width:min(1150px,100%);height:min(780px,90dvh);
+  background:#111014;border:1px solid #554b49;border-radius:0;
+  box-shadow:0 30px 90px rgba(0,0,0,.58)
+}
+.movie-stage::before,.movie-stage::after{display:none}
+.movie-intro,.movie-final{background:rgba(12,10,15,.96)}
+.movie-intro .mini,.movie-final .mini{
+  color:#dbac96;background:transparent;border:0;border-radius:0;
+  font:600 11px/1.5 var(--sans);text-transform:uppercase;letter-spacing:.16em
+}
+.movie-intro h2,.movie-final h2{
+  margin:9px 0 17px;color:#f4e6dc;
+  font:400 clamp(76px,10vw,135px)/.84 var(--serif);
+  letter-spacing:-.05em;text-shadow:none;
+}
+.movie-intro p,.movie-final p{color:#dccbc5;font:400 clamp(14px,2vw,18px)/1.8 var(--sans)}
+.movie-caption{
+  color:#f7eee5;background:rgba(19,14,19,.79);
+  border:0;border-radius:0;
+  font:400 21px/1.4 var(--serif);box-shadow:none;
+}
+.movie-progress{height:3px;background:rgba(225,199,185,.21);border-radius:0}
+.movie-progress span{border-radius:0;background:#d5ae9a}
+.music-start-btn,.movie-skip,.anniversary-close{
+  background:#eaddd2;color:#35272e;border:0;border-radius:0;
+  box-shadow:none;font:600 12px/1.4 var(--sans)
+}
+.music-start-btn:hover,.movie-skip:hover,.anniversary-close:hover{background:#c9a18c}
+.music-status{color:#e2d0c4}
+.movie-slide img{filter:saturate(.88);background:#111014}
+.movie-slide::after{background:linear-gradient(to top,rgba(14,10,16,.71),transparent 50%)}
+.anniversary-video{border:0;border-radius:0;background:#08080a}
+.movie-grain{opacity:.045}
+
+/* 9 / MOVIMIENTO — apenas el necesario para guiar la mirada */
+@keyframes appear{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.hero h1{animation:appear .75s ease-out both}
+.hero p{animation:appear .75s .15s ease-out both}
+.has-motion .scroll-reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+.has-motion .scroll-reveal.is-visible{opacity:1;transform:translateY(0)}
+@media(min-width:1150px){
+  .anniversary-card:nth-child(even) .anniversary-photo{grid-column:2}
+}
+@media(max-width:1150px){
+  .hero-stage{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .hero{padding:70px 48px}
+  .hero h1{font-size:clamp(85px,9vw,130px)}
+  .interlude,.chapter-heading{grid-template-columns:170px minmax(0,1fr)}
+  .gallery-entry-card h2{font-size:clamp(75px,8.5vw,120px)}
+  .anniversary-card,.anniversary-card.previous,.anniversary-card.current{min-height:560px}
+  .anniversary-photo{height:460px}
+}
+@media(max-width:850px){
+  .site-header{min-height:74px;padding:0 29px}
+  .site-meta{display:none}
+  .hero-stage{position:relative;display:block;min-height:630px;height:calc(100svh - 74px);overflow:hidden}
+  .hero{position:absolute;inset:auto 0 0;z-index:4;min-height:0;padding:120px 30px 70px;background:linear-gradient(to top,rgba(21,12,21,.97),rgba(24,14,23,.78) 54%,transparent);pointer-events:none}
+  .hero .eyebrow,.hero h1,.hero p,.hero-signature{position:relative;z-index:2}
+  .hero h1{font-size:clamp(77px,10vw,110px)}
+  .hero p{max-width:530px}
+  .carousel-section{position:absolute;inset:0;width:100%;height:100%;max-height:none;min-height:0}
+  .carousel{height:100%;min-height:0}
+  .carousel::before{background:linear-gradient(to top,rgba(19,12,21,.78),transparent 58%)}
+  .carousel-overlay{display:none}
+  .carousel-counter{right:31px;top:27px}
+  .carousel-btn{top:24px;bottom:auto}
+  .dots{top:43px;bottom:auto;left:30px}
+  .interlude{grid-template-columns:1fr;gap:27px;padding:85px 37px}
+  .interlude .interlude-end{grid-column:1}
+  .gallery-entry-card{display:flex;flex-direction:column;min-height:0}
+  .gallery-art{width:100%;height:64vw;min-height:380px}
+  .gallery-entry-card>span{padding:55px 37px 0}
+  .gallery-entry-card h2{padding:0 37px;font-size:110px}
+  .gallery-entry-card p{padding:0 37px;max-width:600px}
+  .gallery-entry-btn{margin:35px 37px 75px}
+  .anniversary-section{padding:100px 37px}
+  .chapter-heading{display:block;margin-bottom:48px}
+  .chapter-heading h2{margin-top:20px}
+  .anniversary-card,.anniversary-card.previous,.anniversary-card.current{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    min-height:500px;gap:0 32px;
+  }
+  .anniversary-photo{height:400px}
+  .anniversary-card h2{font-size:75px}
+  .letters-section{padding:85px 37px}
+}
+@media(max-width:620px){
+  .site-header{min-height:70px;padding:0 19px}
+  .site-brand{font-size:25px}
+  .site-nav{gap:16px}
+  .site-nav a{font-size:9px;letter-spacing:.08em}
+  .hero-stage{min-height:635px;height:calc(100svh - 70px)}
+  .carousel-section{height:100%;min-height:0}
+  .carousel-counter{top:23px;right:22px}
+  .carousel-btn{width:34px;height:34px;top:21px;bottom:auto;font-size:21px}
+  .prev{right:65px}.next{right:19px}
+  .dots{left:22px;top:37px;bottom:auto}
+  .hero{padding:125px 23px 58px}
+  .hero::before{display:none}
+  .hero .eyebrow{margin-bottom:20px;font-size:10px}
+  .hero h1{font-size:clamp(72px,13vw,90px);margin-bottom:21px}
+  .hero p{font-size:12.5px;line-height:1.7}
+  .hero-signature{margin-top:22px;font-size:20px}
+  .interlude{padding:74px 24px;gap:18px}
+  .interlude blockquote{font-size:clamp(46px,10vw,70px)}
+  .interlude .interlude-end{font-size:12px}
+  .gallery-art{min-height:0;height:110vw;max-height:550px}
+  .gallery-entry-card>span{padding:45px 24px 0}
+  .gallery-entry-card h2{padding:0 24px;margin:18px 0;font-size:clamp(85px,17vw,120px)}
+  .gallery-entry-card p{padding:0 24px;font-size:13px}
+  .gallery-entry-btn{margin:30px 24px 60px}
+  .anniversary-section{padding:85px 23px}
+  .chapter-heading h2{font-size:clamp(70px,13vw,100px)}
+  .anniversary-card,.anniversary-card.previous,.anniversary-card.current{
+    display:flex;flex-direction:column;min-height:0;padding:36px 0 50px;
+  }
+  .anniversary-card:nth-child(even) .anniversary-photo{order:0}
+  .anniversary-photo{height:94vw;max-height:510px;margin-bottom:26px}
+  .anniversary-date{order:1;margin:0 0 14px}
+  .anniversary-card h2{order:2;margin:0 0 14px;font-size:clamp(78px,14vw,105px)}
+  .anniversary-card p{order:3;font-size:13px;margin:0 0 20px}
+  .anniversary-btn{order:4;font-size:12px;padding:13px 0}
+  .letters-section{padding:80px 23px 90px}
+  .section-header h2{font-size:clamp(85px,16vw,125px)}
+  .section-header p{font-size:13px}
+  .letters-grid{grid-template-columns:1fr}
+  .letter-card,.letter-card:nth-child(even){min-height:170px;padding:29px 0;border-right:0}
+  .letter-number{margin-bottom:20px}
+  .letter-card h3{font-size:36px}
+  .letter-card p{font-size:12px}
+  .gallery-page{padding:30px 20px 90px}
+  .gallery-header{margin:65px 0 45px}
+  .gallery-header h1{font-size:clamp(95px,17vw,135px)}
+  .gallery-header p{font-size:13px}
+  .photos-grid{columns:2 145px;column-gap:12px}
+  .photo-card{margin-bottom:12px}
+  .letter-page{padding:54px 25px 34px}
+  .letter-page h2{font-size:80px}
+  .letter-text{font-size:15px}
+  .anniversary-overlay{padding:5px}
+  .movie-stage{width:100%;height:92dvh}
+  .movie-final{padding:76px 16px 72px}
+  .movie-intro h2,.movie-final h2{font-size:clamp(75px,14vw,105px)}
+  .movie-caption{bottom:62px;font-size:16px;padding:13px}
+  .music-start-btn{left:11px;bottom:78px;font-size:11px}
+  .music-status{left:11px;bottom:44px;font-size:11px}
+  .movie-skip{left:11px;top:15px}
+  .anniversary-close{right:11px;top:15px}
+  .movie-progress{left:11px;right:11px;bottom:20px}
+}
+@media(max-width:390px){
+  .site-header{padding:0 13px}
+  .site-nav{gap:12px}
+  .site-nav a{font-size:8.5px}
+  .hero h1{font-size:82px}
+  .gallery-entry-card h2{font-size:78px}
+  .photos-grid{columns:1}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero h1,.hero p{animation:none}
+  .has-motion .scroll-reveal{opacity:1;transform:none;transition:none}
+  .slide,.carousel-btn,.letter-card,.photo-card img{transition:none!important}
+  .floating-heart,.confetti-piece{animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
